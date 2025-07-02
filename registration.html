@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="registration.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="top-bar">
+    <!-- Иконка меню -->
+    <img src="menu-icon.svg" alt="Menu" class="menu-icon">
+
+    <!-- Кнопка "Вход" -->
+    <a href="login.html" class="login-link">ВХОД</a>
+  </header>
+
+  <!-- Registration Form -->
+  <div class="register-container">
+    <form class="register-form">
+
+      <div class="form-header">
+        <h2>Регистрация</h2>
+        <img src="petry-logo.svg" alt="Petry" class="form-logo">
+      </div>
+
+      <label>Имя</label>
+      <input type="text" required>
+
+      <label>Фамилия</label>
+      <input type="text" required>
+
+      <label>Электронная почта</label>
+      <input type="email" required>
+
+      <label>Регион</label>
+      <select required>
+        <option value="">Не выбрано</option>
+        <option value="kz">Казахстан</option>
+        <option value="ru">Россия</option>
+        <option value="uz">Узбекистан</option>
+        <!-- Добавь больше стран при необходимости -->
+      </select>
+
+      <label>Пароль</label>
+      <input type="password" required>
+
+      <label>Подтвердить пароль</label>
+      <input type="password" required>
+
+      <div class="checkbox-container">
+        <input type="checkbox" id="agree" required>
+        <label for="agree">
+          Я согласен(а) с <a href="#">Политикой конфиденциальности</a> и даю согласие на обработку персональных данных.
+        </label>
+      </div>
+
+      <button type="submit">Зарегистрироваться</button>
+    </form>
+  </div>
+
+</body>
+</html>

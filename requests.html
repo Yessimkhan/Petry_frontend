@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Section 53 - Запросы</title>
+    <link rel="stylesheet" href="requests.css">
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <header class="topbar">
+        <img src="menu-icon.svg" alt="Menu" class="menu-icon" id="menuToggle" />
+        <div class="login-link">
+            <div class="user-info">
+                <div class="email">abcabc@gmail.com</div>
+            </div>
+            <img src="person-icon.svg" alt="Profile" class="person-icon" />
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="menu">
+                <a class="menu-item" href="#">Автоподпись исполнительных производств</a>
+
+                <div class="menu-item with-children">
+                    <span>Действия ЧСИ</span>
+                    <div class="submenu">
+                        <a href="#" class="active">Запросы</a>
+                        <a href="#">Меры</a>
+                    </div>
+                </div>
+
+                <a class="menu-item" href="#">Бухгалтерия</a>
+                <a class="menu-item" href="#">Реестр должников</a>
+                <a class="menu-item" href="#">Статистика</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <div class="filters" style="margin-bottom: 10px;">
+                <input type="text" placeholder="Введите номер Исполнительного производства...">
+                <button>Поиск</button>
+            </div>
+            <div class="filters" style="margin-bottom: 10px;">
+                <h3>Исполнительное производство: <span style="color:#0b5d84">0902994050767</span></h3>
+                <button>Отправка повторного запроса</button>
+            </div>
+
+            <details open>
+                <summary>
+                    <h3>Данные о ФЛ и ЮЛ</h3>
+                </summary>
+                <div style="display: flex; gap: 40px;">
+                    <ul class="checklist">
+                        <li>✔️ Сведения о физическом лице <a href="#">⬇</a></li>
+                        <li>✔️ Фото из системы документирования населения <a href="#">⬇</a></li>
+                        <li>✔️ Форма 1 из системы документирования населения <a href="#">⬇</a></li>
+                        <li>✔️ Записи актов гражданского состояния <a href="#">⬇</a></li>
+                        <li>✔️ Инвалидность <a href="#">⬇</a></li>
+                    </ul>
+                    <ul class="checklist">
+                        <li>⚪ Водительское удостоверение</li>
+                        <li>⚪ Рынок труда</li>
+                        <li>⚪ Иностранная рабочая сила</li>
+                        <li>⚪ Адм. правонарушения дорожного движения</li>
+                        <li>⚪ Адм. правонарушения дорожного движения (Name)</li>
+                        <li>⚪ Адм. правонарушения иностранных граждан</li>
+                    </ul>
+                </div>
+            </details>
+
+
+            <details open>
+                <summary><b>✔️ Имущество (10/10)</b></summary>
+                <p>...</p>
+            </details>
+            <details>
+                <summary><b>✔️ Финансы (0/5)</b></summary>
+                <p>...</p>
+            </details>
+            <details>
+                <summary><b>✔️ Розыск (2/5)</b></summary>
+                <p>...</p>
+            </details>
+        </main>
+    </div>
+
+    <!-- JS -->
+    <script>
+        const toggleButton = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+        toggleButton.addEventListener("click", () => {
+            sidebar.classList.toggle("hidden");
+        });
+    </script>
+</body>
+
+</html>

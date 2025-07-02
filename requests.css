@@ -1,0 +1,186 @@
+/* General */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background-color: #0b5d84;
+}
+
+.menu-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.login-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.email {
+    font-weight: bold;
+    color: white;
+}
+
+.subscription {
+    font-size: 12px;
+    color: #FF696B;
+}
+
+.person-icon {
+    width: 60px;
+    height: 60px;
+}
+
+.subscription-text {
+    font-size: 14px;
+    color: gray;
+}
+
+/* Container */
+.container {
+    display: flex;
+    height: calc(100vh - 60px);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #0b5d84;
+    color: white;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.menu-item {
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+}
+
+.menu-item.active {
+    text-decoration: underline;
+}
+
+.with-children {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.submenu {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    gap: 8px;
+}
+
+.submenu a {
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+    padding-left: 8px;
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.submenu a.active {
+    font-weight: bold;
+    color: #a2e4ff;
+}
+
+/* Main Content */
+.main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #ffffff;
+}
+
+.filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: space-between;
+}
+
+.filters input {
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 350px;
+}
+
+.filters button {
+    padding: 8px 12px;
+    font-size: 14px;
+    background-color: #0b5d84;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.section h3 {
+    margin-top: 0;
+    color: #0b5d84;
+}
+
+.checklist {
+    list-style: none;
+    padding-left: 0;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.checklist li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.checklist a {
+    text-decoration: none;
+    color: #0b5d84;
+}
+
+/* Details */
+details {
+    background: #f4f9fc;
+    margin-top: 10px;
+    border: 1px solid #cde5f3;
+    border-radius: 6px;
+    padding: 10px 14px;
+}
+
+details summary {
+    cursor: pointer;
+    font-weight: bold;
+    color: #0b5d84;
+    margin-bottom: 8px;
+}

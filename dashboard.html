@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+    <!-- Top Bar -->
+    <header class="topbar">
+        <img src="menu-icon.svg" alt="Menu" class="menu-icon" id="menuToggle" />
+        <div class="login-link">
+            <div class="user-info">
+                <div class="email">abcabc@gmail.com</div>
+                <div class="subscription">Осталось 3 дня до окончания подписки</div>
+            </div>
+            <img src="person-icon.svg" alt="Profile" class="person-icon" />
+        </div>
+    </header>
+
+
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="menu">
+                <a class="menu-item" href="#">Автоподпись исполнительных производств</a>
+
+                <div class="menu-item with-children">
+                    <span>Действия ЧСИ</span>
+                    <div class="submenu">
+                        <a href="requests.html">Запросы</a>
+                        <a href="#">Меры</a>
+                    </div>
+                </div>
+
+                <a class="menu-item" href="#">Бухгалтерия</a>
+                <a class="menu-item" href="#">Реестр должников</a>
+                <a class="menu-item" href="#">Статистика</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Stats cards -->
+            <div class="stats">
+                <div class="card">На подписание<br><b>120</b></div>
+                <div class="card">Завершено<br><b>120</b></div>
+                <div class="card">Осталось<br><b>120</b></div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <button>Выберите период</button>
+                <input type="text" value="11/06/2025 - 11/07/2025">
+                <button>Выбор сотрудника</button>
+                <input type="text" value="А. Аааааааааа">
+            </div>
+
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Категория</th>
+                        <th>Остаток исполнительных производств на начало отчетного периода</th>
+                        <th>Возбуждено исполнительных производств в отчетном периоде</th>
+                        <th>Итого было на исполнении операции</th>
+                        <th>Прекращенные</th>
+                        <th>Возвращенные</th>
+                        <th>Ответственный сотрудник</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Распределенные</th>
+                        <th colspan="6"></th>
+                    </tr>
+                    <tr>
+                        <th>Не распределенные</th>
+                        <th colspan="6"></th>
+                    </tr>
+                    <tr>
+                        <th>Общее количество</th>
+                        <th colspan="6"></th>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <!-- Right Side (Progress) -->
+        <aside class="progress">
+            <div class="parent">
+                <div class="circle">
+                    <div class="percentage">75%</div>
+                    <div class="text">Выполняется автоподпись…</div>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <!-- JS -->
+    <script>
+        const toggleButton = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+
+        toggleButton.addEventListener("click", () => {
+            sidebar.classList.toggle("hidden");
+        });
+    </script>
+
+</body>
+
+</html>
