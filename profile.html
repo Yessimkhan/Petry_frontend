@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Сотрудники и Профиль</title>
+    <link rel="stylesheet" href="profile.css" />
+</head>
+
+<body>
+
+    <header class="topbar">
+        <img src="menu-icon.svg" alt="Menu" class="menu-icon" id="menuToggle" />
+        <div class="login-link">
+            <div class="user-info">
+                <div class="email">abcabc@gmail.com</div>
+                <div class="subscription">Осталось 3 дня до окончания подписки</div>
+            </div>
+            <a href="profile.html">
+                <img src="person-icon.svg" alt="Profile" class="person-icon" />
+            </a>
+        </div>
+    </header>
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="menu">
+                <a class="menu-item active" href="dashboard.html">Автоподпись исполнительных производств</a>
+                <div class="menu-item with-children">
+                    <span>Действия ЧСИ</span>
+                    <div class="submenu">
+                        <a href="requests.html">Запросы</a>
+                        <a href="#">Меры</a>
+                    </div>
+                </div>
+
+                <a class="menu-item" href="#">Бухгалтерия</a>
+                <a class="menu-item" href="#">Реестр должников</a>
+                <a class="menu-item" href="#">Статистика</a>
+            </nav>
+        </aside>
+
+        <!-- Сотрудники Section -->
+        <div class="employees-section">
+            <h1>Сотрудники</h1>
+            <div class="count">Количество: 9</div>
+            <button class="edit-btn">Редактировать</button>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ФИО сотрудника</th>
+                        <th>Категория ИП</th>
+                        <th>Количество ИП в работе</th>
+                        <th>Статус</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Иванов Иван</td>
+                        <td>Взыскание налоговой задолженности</td>
+                        <td>1 000</td>
+                        <td class="status-active">Активный</td>
+                    </tr>
+                    <tr>
+                        <td>Иванов Иван</td>
+                        <td>Взыскание налоговой задолженности</td>
+                        <td>1 000</td>
+                        <td class="status-passive">Пассивный</td>
+                    </tr>
+                    <tr>
+                        <td>Иванов Иван</td>
+                        <td>Взыскание налоговой задолженности</td>
+                        <td>1 000</td>
+                        <td class="status-active">Активный</td>
+                    </tr>
+                    <tr>
+                        <td>Иванов Иван</td>
+                        <td>Взыскание налоговой задолженности</td>
+                        <td>1 000</td>
+                        <td class="status-active">Активный</td>
+                    </tr>
+                    <tr>
+                        <td>Иванов Иван</td>
+                        <td>Взыскание налоговой задолженности</td>
+                        <td>1 000</td>
+                        <td class="status-passive">Пассивный</td>
+                    </tr>
+                    <tr>
+                        <td>Иванов Иван</td>
+                        <td>Взыскание налоговой задолженности</td>
+                        <td>1 000</td>
+                        <td class="status-passive">Пассивный</td>
+                    </tr>
+                    <tr>
+                        <td>Иванов Иван</td>
+                        <td>Взыскание налоговой задолженности</td>
+                        <td>1 000</td>
+                        <td class="status-active">Активный</td>
+                    </tr>
+                    <tr>
+                        <td>Иванов Иван</td>
+                        <td>Взыскание налоговой задолженности</td>
+                        <td>1 000</td>
+                        <td class="status-active">Активный</td>
+                    </tr>
+                    <tr>
+                        <td>Иванов Иван</td>
+                        <td>Взыскание налоговой задолженности</td>
+                        <td>1 000</td>
+                        <td class="status-active">Активный</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <button class="add-btn">+</button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" id="addEmployeeModal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Добавления Сотрудника</h2>
+
+                <label>ФИО Сотрудника</label>
+                <input type="text" placeholder="Введите ФИО" />
+
+                <label>Категория ИП</label>
+                <select>
+                    <option selected disabled>Не выбрано</option>
+                    <option>Взыскание налоговой задолженности</option>
+                    <option>Иные ИП</option>
+                </select>
+
+                <label>Количество ИП в работе</label>
+                <input type="number" placeholder="Введите количество" />
+
+                <label>Статус</label>
+                <select>
+                    <option selected disabled>Не выбрано</option>
+                    <option>Активный</option>
+                    <option>Пассивный</option>
+                </select>
+
+                <button class="save-btn">Сохранить</button>
+            </div>
+        </div>
+
+
+        <!-- Профиль Section -->
+        <div class="profile-section">
+            <h1>Профиль</h1>
+            <p>Судебный исполнитель: Имя Фамилия</p>
+            <p>Регион: Алматинская область</p>
+
+            <form class="profile-form">
+                <label>Email</label>
+                <input type="email" placeholder="Введите email" />
+
+                <label>Пароль</label>
+                <div class="form-group-row">
+                    <input type="password" placeholder="Введите пароль" />
+                    <button type="button" class="edit-btn">Изменить</button>
+                </div>
+
+                <h3>ЭЦП</h3>
+
+                <label>Путь на устройстве</label>
+                <input type="text" placeholder="Например, D:\keys\" />
+
+                <label>Введите пароль</label>
+                <input type="password" placeholder="Пароль для ЭЦП" />
+
+                <button type="submit" class="save-btn">Сохранить</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        const toggleButton = document.getElementById("menuToggle");
+        const sidebar = document.getElementById("sidebar");
+
+        toggleButton.addEventListener("click", () => {
+            sidebar.classList.toggle("show");
+        });
+
+        const addBtn = document.querySelector(".add-btn");
+        const modal = document.getElementById("addEmployeeModal");
+        const closeModal = document.querySelector(".modal .close");
+
+        // Open modal
+        addBtn.addEventListener("click", () => {
+            modal.style.display = "block";
+        });
+
+        // Close modal on X click
+        closeModal.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        // Close modal when clicking outside modal content
+        window.addEventListener("click", (event) => {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+    </script>
+</body>
+
+</html>

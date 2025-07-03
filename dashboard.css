@@ -83,6 +83,13 @@ body {
     text-decoration: none;
 }
 
+.menu-item.active{
+    font-weight: bold;
+    font-size: 18px;
+    color: #a2e4ff;
+    text-decoration: none;
+}
+
 .with-children {
     display: flex;
     flex-direction: column;
@@ -226,3 +233,4 @@ th, td {
     top: 55%;
     width: 70%;
 }
+
