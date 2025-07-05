@@ -7,9 +7,7 @@ loginForm.addEventListener('submit', async function (e) {
     const password = loginForm.querySelector('input[type="password"]').value;
 
     try {
-        const proxy = 'https://cors-anywhere.herokuapp.com/';
-        const apiURL = 'https://petry.sdutechnopark.kz/api/auth/login/';
-        const url = proxy + apiURL;
+        const url = 'https://petry.sdutechnopark.kz/api/auth/login/';
 
         const response = await fetch(url, {
             method: 'POST',
