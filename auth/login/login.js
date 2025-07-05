@@ -30,7 +30,7 @@ loginForm.addEventListener('submit', async function (e) {
             localStorage.setItem('refresh_token', result.refresh);
 
             // Получаем данные пользователя
-            const userResponse = await fetch('https://cors-anywhere.herokuapp.com/https://petry.sdutechnopark.kz/api/auth/me/', {
+            const userResponse = await fetch('https://petry.sdutechnopark.kz/api/auth/me/', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + result.access,
