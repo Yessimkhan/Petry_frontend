@@ -9,17 +9,16 @@
 </head>
 
 <body>
-
     <!-- Top Bar -->
     <header class="topbar">
-        <img src="menu-icon.svg" alt="Menu" class="menu-icon" id="menuToggle" />
+        <img src="../../assets/menu-icon.svg" alt="Menu" class="menu-icon" id="menuToggle" />
         <div class="login-link">
             <div class="user-info">
                 <div class="email">abcabc@gmail.com</div>
                 <div class="subscription">Осталось 3 дня до окончания подписки</div>
             </div>
-            <a href="profile.html">
-                <img src="person-icon.svg" alt="Profile" class="person-icon" />
+            <a href="../profile/profile.html">
+                <img src="../../assets/person-icon.svg" alt="Profile" class="person-icon" />
             </a>
         </div>
     </header>
@@ -35,7 +34,7 @@
                 <div class="menu-item with-children">
                     <span>Действия ЧСИ</span>
                     <div class="submenu">
-                        <a href="requests.html">Запросы</a>
+                        <a href="../request/requests.html">Запросы</a>
                         <a href="#">Меры</a>
                     </div>
                 </div>
@@ -105,16 +104,19 @@
 
     </div>
 
+    <div id="consentModal" class="consent-modal">
+        <div class="consent-content">
+            <p>
+                Я, пользователь информационной системы «ASO», продолжая работу на портале подтверждаю свое согласие, что
+                несу
+                ответственность за все осуществленные действия в соответствии с законодательством Республики Казахстан.
+            </p>
+            <button id="acceptConsent">Принять</button>
+        </div>
+    </div>
+
     <!-- JS -->
-    <script>
-        const toggleButton = document.getElementById("menuToggle");
-        const sidebar = document.getElementById("sidebar");
-
-        toggleButton.addEventListener("click", () => {
-            sidebar.classList.toggle("hidden");
-        });
-    </script>
-
+    <script src="dashboard.js"></script>
 </body>
 
 </html>

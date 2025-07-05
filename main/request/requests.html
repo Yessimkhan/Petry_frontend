@@ -6,17 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Section 53 - Запросы</title>
     <link rel="stylesheet" href="requests.css">
+    <style>
+        .checklist-columns {
+            display: flex;
+            gap: 40px;
+        }
+
+        .checklist-columns .checklist {
+            flex: 1;
+            min-width: 300px;
+        }
+    </style>
 </head>
 
 <body>
     <!-- Top Bar -->
     <header class="topbar">
-        <img src="menu-icon.svg" alt="Menu" class="menu-icon" id="menuToggle" />
+        <img src="../../assets/menu-icon.svg" alt="Menu" class="menu-icon" id="menuToggle" />
         <div class="login-link">
             <div class="user-info">
                 <div class="email">abcabc@gmail.com</div>
             </div>
-            <img src="person-icon.svg" alt="Profile" class="person-icon" />
+            <a href="../profile/profile.html">
+                <img src="../../assets/person-icon.svg" alt="Profile" class="person-icon" />
+            </a>
         </div>
     </header>
 
@@ -24,8 +37,7 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <nav class="menu">
-                <a class="menu-item" href="dashboard.html">Автоподпись исполнительных производств</a>
-
+                <a class="menu-item" href="../dashboard/dashboard.html">Автоподпись исполнительных производств</a>
                 <div class="menu-item with-children">
                     <span>Действия ЧСИ</span>
                     <div class="submenu">
@@ -33,7 +45,6 @@
                         <a href="#">Меры</a>
                     </div>
                 </div>
-
                 <a class="menu-item" href="#">Бухгалтерия</a>
                 <a class="menu-item" href="#">Реестр должников</a>
                 <a class="menu-item" href="#">Статистика</a>
@@ -42,17 +53,22 @@
 
         <!-- Main Content -->
         <main class="main">
+            <div class="filter-buttons" style="margin-bottom: 10px;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button>Отправка всех</button>
+                    <button>Отправка 1го ИП</button>
+                    <button>По категории и по периоду</button>
+                </div>
+            </div>
+
+            <h3 style="color:#0b5d84">Исполнительное производство: 0902994050767</h3>
+
             <div class="filters" style="margin-bottom: 10px;">
                 <input type="text" placeholder="Введите номер Исполнительного производства...">
                 <button>Поиск</button>
             </div>
-            <div class="filters" style="margin-bottom: 10px;">
-                <h3 style="color:#0b5d84">Исполнительное производство: 0902994050767</h3>
-                <button>Отправка повторного запроса</button>
-            </div>
 
-            <!-- ... previous unchanged part ... -->
-
+            <!-- Данные о ФЛ и ЮЛ -->
             <details open>
                 <summary class="summary-with-count">
                     <span class="summary-title">Данные о ФЛ и ЮЛ</span>
@@ -61,13 +77,11 @@
                         <span class="arrow">▼</span>
                     </span>
                 </summary>
-                <div style="display: flex; gap: 40px;">
+                <div class="checklist-columns">
                     <ul class="checklist">
                         <li><input type="checkbox" checked> Сведения о физическом лице <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Фото из системы документирования населения <a href="#">⬇</a>
-                        </li>
-                        <li><input type="checkbox" checked> Форма 1 из системы документирования населения <a
-                                href="#">⬇</a></li>
+                        <li><input type="checkbox" checked> Фото из системы документирования населения <a href="#">⬇</a></li>
+                        <li><input type="checkbox" checked> Форма 1 из системы документирования населения <a href="#">⬇</a></li>
                         <li><input type="checkbox" checked> Записи актов гражданского состояния <a href="#">⬇</a></li>
                         <li><input type="checkbox" checked> Инвалидность <a href="#">⬇</a></li>
                     </ul>
@@ -82,6 +96,7 @@
                 </div>
             </details>
 
+            <!-- Иммущество -->
             <details open>
                 <summary class="summary-with-count">
                     <span class="summary-title">Иммушество</span>
@@ -90,7 +105,7 @@
                         <span class="arrow">▼</span>
                     </span>
                 </summary>
-                <div style="display: flex; gap: 40px;">
+                <div class="checklist-columns">
                     <ul class="checklist">
                         <li><input type="checkbox" checked> Регистр недвижимости супруг/филиал <a href="#">⬇</a></li>
                         <li><input type="checkbox" checked> Регистр недвижимости <a href="#">⬇</a></li>
@@ -108,6 +123,7 @@
                 </div>
             </details>
 
+            <!-- Финансы -->
             <details>
                 <summary class="summary-with-count">
                     <span class="summary-title">Финансы</span>
@@ -116,7 +132,7 @@
                         <span class="arrow">▼</span>
                     </span>
                 </summary>
-                <div style="display: flex; gap: 40px;">
+                <div class="checklist-columns">
                     <ul class="checklist">
                         <li><input type="checkbox"> Налоговая задолженность <a href="#">⬇</a></li>
                         <li><input type="checkbox"> Обязательные пенсионные отчисления <a href="#">⬇</a></li>
@@ -127,6 +143,7 @@
                 </div>
             </details>
 
+            <!-- Розыск -->
             <details>
                 <summary class="summary-with-count">
                     <span class="summary-title">Розыск</span>
@@ -135,7 +152,7 @@
                         <span class="arrow">▼</span>
                     </span>
                 </summary>
-                <div style="display: flex; gap: 40px;">
+                <div class="checklist-columns">
                     <ul class="checklist">
                         <li><input type="checkbox" checked> ФЛ и ЮЛ, розыскные карточки <a href="#">⬇</a></li>
                         <li><input type="checkbox" checked> Верховный суд <a href="#">⬇</a></li>
@@ -146,6 +163,7 @@
                 </div>
             </details>
 
+            <!-- Иные -->
             <details>
                 <summary class="summary-with-count">
                     <span class="summary-title">Иные</span>
@@ -154,7 +172,7 @@
                         <span class="arrow">▼</span>
                     </span>
                 </summary>
-                <div style="display: flex; gap: 40px;">
+                <div class="checklist-columns">
                     <ul class="checklist">
                         <li><input type="checkbox"> Полученные услуги в ЦОН <a href="#">⬇</a></li>
                         <li><input type="checkbox"> Казахтелеком <a href="#">⬇</a></li>
@@ -175,6 +193,7 @@
                 </div>
             </details>
 
+            <!-- Досье -->
             <details>
                 <summary class="summary-with-count">
                     <span class="summary-title">Досье</span>
@@ -187,8 +206,6 @@
                     <li><input type="checkbox" checked> Все запросы <a href="#">⬇</a></li>
                 </ul>
             </details>
-
-
         </main>
     </div>
 
@@ -219,7 +236,6 @@
                 cb.addEventListener('change', () => updateCheckboxCount(detail));
             });
 
-            // Optional: toggle arrow direction
             const arrow = detail.querySelector('.arrow');
             if (arrow) {
                 detail.addEventListener('toggle', () => {
@@ -227,7 +243,6 @@
                 });
             }
         });
-
     </script>
 </body>
 

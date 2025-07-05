@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Регистрация</title>
+  <link rel="stylesheet" href="registration.css">
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="top-bar">
+    <img src="../../assets/menu-icon.svg" alt="Menu" class="menu-icon">
+    <a href="login.html" class="login-link">ВХОД</a>
+  </header>
+
+  <!-- Registration Form -->
+  <div class="register-container">
+    <form class="register-form">
+
+      <div class="form-header">
+        <h2>Регистрация</h2>
+        <img src="../../assets/petry-logo.svg" alt="Petry" class="form-logo">
+      </div>
+
+      <label>Имя</label>
+      <input type="text" id="first_name" required>
+
+      <label>Фамилия</label>
+      <input type="text" id="last_name" required>
+
+      <label>Электронная почта</label>
+      <input type="email" id="email" required>
+
+      <label>Регион</label>
+      <select id="region" required>
+        <option value="">Не выбрано</option>
+        <option value="Almaty">Казахстан</option>
+        <option value="Moscow">Россия</option>
+        <option value="Tashkent">Узбекистан</option>
+      </select>
+
+      <label>Пароль</label>
+      <input type="password" id="password" required>
+
+      <label>Подтвердить пароль</label>
+      <input type="password" id="password2" required>
+
+      <!-- Agreement -->
+      <div class="checkbox-container">
+        <input type="checkbox" id="agree">
+        <label for="agree">
+          Я принимаю условия
+          <a href="/docs/user-agreement.docx" download>Пользовательского соглашения</a>
+          и даю согласие на обработку персональных данных в соответствии с
+          <a href="/docs/Политика конфиденциальности rev.1.docx" download>Политикой конфиденциальности</a>
+          и получение информационных сообщений.
+        </label>
+      </div>
+
+      <button type="submit" id="registerBtn">Зарегистрироваться</button>
+    </form>
+  </div>
+
+  <script src="registration.js"></script>
+</body>
+
+</html>
