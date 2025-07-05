@@ -38,7 +38,7 @@ loginForm.addEventListener('submit', async function (e) {
 
             const user = await userResponse.json();
             console.log('👤 Пользователь:', user);
-            window.location.href = '../../main/dashboard/dashboard.html';
+            window.location.href = 'main/dashboard/dashboard.html';
         }
         else {
             alert(result.detail || 'Ошибка входа');
