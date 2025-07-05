@@ -7,7 +7,7 @@ loginForm.addEventListener('submit', async function (e) {
     const password = loginForm.querySelector('input[type="password"]').value;
 
     try {
-        const url = 'https://petry.sdutechnopark.kz/api/auth/login/';
+        const url = 'https://petryapi.sdutechnopark.kz/api/auth/login/';
 
         const response = await fetch(url, {
             method: 'POST',
@@ -28,7 +28,7 @@ loginForm.addEventListener('submit', async function (e) {
             localStorage.setItem('refresh_token', result.refresh);
 
             // Получаем данные пользователя
-            const userResponse = await fetch('https://petry.sdutechnopark.kz/api/auth/me/', {
+            const userResponse = await fetch('https://petryapi.sdutechnopark.kz/api/auth/me/', {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + result.access,

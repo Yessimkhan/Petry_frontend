@@ -23,7 +23,7 @@ form.addEventListener('submit', async function (e) {
     }
 
     try {
-        const response = await fetch('https://petry.sdutechnopark.kz/api/auth/register/', {
+        const response = await fetch('https://petryapi.sdutechnopark.kz/api/auth/register/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
