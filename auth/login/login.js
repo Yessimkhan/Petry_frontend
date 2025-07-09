@@ -12,7 +12,7 @@ loginForm.addEventListener('submit', async function (e) {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({ email, password })
         });
@@ -32,13 +32,13 @@ loginForm.addEventListener('submit', async function (e) {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + result.access,
-                    'Accept': 'application/json'
+                    'Accept': 'application/json',
                 }
             });
 
             const user = await userResponse.json();
             console.log('👤 Пользователь:', user);
-            window.location.href = 'main/dashboard/dashboard.html';
+            window.location.href = '../../index.html';
         }
         else {
             alert(result.detail || 'Ошибка входа');

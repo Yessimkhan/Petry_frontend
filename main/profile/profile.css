@@ -284,7 +284,6 @@ table {
   width: 100%;
   border-collapse: collapse;
   background: white;
-  border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
@@ -355,8 +354,9 @@ th, td {
 }
 
 .profile-section p {
+  color: #0b5d84;
   margin: 4px 0;
-  font-size: 16px;
+  font-size: 22px;
 }
 
 .profile-form {

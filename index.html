@@ -2,44 +2,137 @@
 <html lang="ru">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Petry Login</title>
-  <link rel="stylesheet" href="login.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
 <body>
+    <!-- Top Bar -->
+    <header class="topbar">
+        <img src="assets/menu-icon.svg" alt="Menu" class="menu-icon" id="menuToggle" />
+        <div class="login-link">
+            <div class="user-info">
+                <div class="email">abcabc@gmail.com</div>
+                <div class="subscription">Осталось 3 дня до окончания подписки</div>
+            </div>
+            <a href="main/profile/profile.html">
+                <img src="assets/person-icon.svg" alt="Profile" class="person-icon" />
+            </a>
+        </div>
+    </header>
 
-  <!-- Top Bar -->
-  <header class="top-bar">
-    <img src="assets/menu-icon.svg" alt="Menu" class="menu-icon" />
-  </header>
 
-  <!-- Login Container -->
-  <div class="login-container">
-    <img src="assets/petry-logo.svg" alt="Petry Logo" class="logo" />
 
-    <form class="login-form">
-      <label>Логин</label>
-      <input type="text" placeholder="Введите логин" />
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar hidden" id="sidebar">
+            <nav class="menu">
+                <a class="menu-item active" href="index.html" data-page="Автоподпись"> Автоподпись исполнительных производств</a>
+                <div class="menu-item with-children">
+                    <span>Действия ЧСИ</span>
+                    <div class="submenu">
+                        <a href="/main/request/requests.html" data-page="Запросы">Запросы</a>
+                        <a href="#" data-page="Меры">Меры</a>
+                    </div>
+                </div>
 
-      <label>Пароль</label>
-      <input type="password" placeholder="Введите пароль" />
-      
-      <div class="forgot-password">
-        <a href="/auth/password-reset/password-reset.html">Забыли пароль ?</a>
-      </div>
+                <a class="menu-item" href="/main/Accounting/accounting.html" data-page="Бухгалтерия">Бухгалтерия</a>
+                <a class="menu-item" href="/main/registerOfDebtors/registerOfDebtors.html"
+                    data-page="Реестр должников">Реестр должников</a>
+                <a class="menu-item" href="#" data-page="Статистика">Статистика</a>
 
-      <button type="submit" id="submitBtn">ВОЙТИ</button>
-    </form>
+            </nav>
+        </aside>
 
-    <div class="register-link">
-      <a href="/auth/registration/registration.html">Регистрация</a>
+        <!-- Main Content -->
+        <main class="main">
+            <!-- Stats cards -->
+            <div class="stats">
+                <div class="card">На подписание<br><b>120</b></div>
+                <div class="card">Завершено<br><b>120</b></div>
+                <div class="card">Осталось<br><b>120</b></div>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <button id="openCalendar">Выберите период</button>
+                <input id="dateRange" type="text" placeholder="дд/мм/гггг - дд/мм/гггг">
+
+                <div class="employee-select">
+                    <button id="openEmployeeMenu">Выбор сотрудника</button>
+                    <input type="text" id="employeeInput" placeholder="Введите имя или выберите из списка">
+
+                    <div id="employeeDropdown" class="dropdown hidden">
+                        <div class="dropdown-item">А. Ааааааа</div>
+                        <div class="dropdown-item">Б. Ббббббб</div>
+                        <div class="dropdown-item">В. Ввввввв</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Table -->
+            <table>
+                <thead>
+                    <tr>
+                        <th>Категория</th>
+                        <th>Остаток исполнительных производств на начало отчетного периода</th>
+                        <th>Возбуждено исполнительных производств в отчетном периоде</th>
+                        <th>Итого было на исполнении операции</th>
+                        <th>Прекращенные</th>
+                        <th>Возвращенные</th>
+                        <th>Ответственный сотрудник</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th>Распределенные</th>
+                        <th colspan="6"></th>
+                    </tr>
+                    <tr>
+                        <th>Не распределенные</th>
+                        <th colspan="6"></th>
+                    </tr>
+                    <tr>
+                        <th>Общее количество</th>
+                        <th colspan="6"></th>
+                    </tr>
+                </tbody>
+            </table>
+        </main>
+
+        <!-- Right Side (Progress) -->
+        <aside class="progress">
+            <div class="parent">
+                <div class="circle">
+                    <div class="percentage">75%</div>
+                    <div class="text">Выполняется автоподпись…</div>
+                </div>
+            </div>
+        </aside>
+
     </div>
-  </div>
 
-  <script src="login.js"></script>
+    <div id="consentModal" class="consent-modal">
+        <div class="consent-content">
+            <p>
+                Я, пользователь информационной системы «ASO», продолжая работу на портале подтверждаю свое согласие, что
+                несу
+                ответственность за все осуществленные действия в соответствии с законодательством Республики Казахстан.
+            </p>
+            <button id="acceptConsent">Принять</button>
+        </div>
+    </div>
 
+    <!-- JS -->
+    <script src="index.js"></script>
 </body>
 
 </html>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Section 53 - Запросы</title>
+    <title>Запросы</title>
     <link rel="stylesheet" href="requests.css">
     <style>
         .checklist-columns {
@@ -37,7 +37,7 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <nav class="menu">
-                <a class="menu-item" href="../dashboard/dashboard.html">Автоподпись исполнительных производств</a>
+                <a class="menu-item" href="../../index.html">Автоподпись исполнительных производств</a>
                 <div class="menu-item with-children">
                     <span>Действия ЧСИ</span>
                     <div class="submenu">
@@ -45,8 +45,8 @@
                         <a href="#">Меры</a>
                     </div>
                 </div>
-                <a class="menu-item" href="#">Бухгалтерия</a>
-                <a class="menu-item" href="#">Реестр должников</a>
+                <a class="menu-item" href="../accounting/accounting.html">Бухгалтерия</a>
+                <a class="menu-item" href="../registerOfDebtors/registerOfDebtors.html">Реестр должников</a>
                 <a class="menu-item" href="#">Статистика</a>
             </nav>
         </aside>
@@ -210,40 +210,7 @@
     </div>
 
     <!-- JS -->
-    <script>
-        const toggleButton = document.getElementById("menuToggle");
-        const sidebar = document.getElementById("sidebar");
-        toggleButton.addEventListener("click", () => {
-            sidebar.classList.toggle("hidden");
-        });
-
-        function updateCheckboxCount(detailsElement) {
-            const checkboxes = detailsElement.querySelectorAll('input[type="checkbox"]');
-            const checkedCount = [...checkboxes].filter(cb => cb.checked).length;
-            const countSpan = detailsElement.querySelector('.check-count');
-            if (countSpan) {
-                countSpan.textContent = `${checkedCount}/${checkboxes.length}`;
-            }
-        }
-
-        const detailsList = document.querySelectorAll('details');
-
-        detailsList.forEach(detail => {
-            updateCheckboxCount(detail);
-
-            const checkboxes = detail.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(cb => {
-                cb.addEventListener('change', () => updateCheckboxCount(detail));
-            });
-
-            const arrow = detail.querySelector('.arrow');
-            if (arrow) {
-                detail.addEventListener('toggle', () => {
-                    arrow.textContent = detail.open ? '▼' : '►';
-                });
-            }
-        });
-    </script>
+    <script src="requests.js"></script>
 </body>
 
 </html>

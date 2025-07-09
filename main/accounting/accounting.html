@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accounting</title>
+    <link rel="stylesheet" href="accounting.css">
+</head>
+
+<body>
+    <!-- Top Bar -->
+    <header class="topbar">
+        <img src="../../assets/menu-icon.svg" alt="Menu" class="menu-icon" id="menuToggle" />
+        <div class="login-link">
+            <div class="user-info">
+                <div class="email">abcabc@gmail.com</div>
+            </div>
+            <a href="main/profile/profile.html">
+                <img src="../../assets/person-icon.svg" alt="Profile" class="person-icon" />
+            </a>
+        </div>
+    </header>
+
+
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <nav class="menu">
+                <a class="menu-item" href="../../index.html">Автоподпись исполнительных производств</a>
+                <div class="menu-item with-children">
+                    <span>Действия ЧСИ</span>
+                    <div class="submenu">
+                        <a href="/main/request/requests.html">Запросы</a>
+                        <a href="#">Меры</a>
+                    </div>
+                </div>
+
+                <a class="menu-item active" href="#">Бухгалтерия</a>
+                <a class="menu-item" href="../registerOfDebtors/registerOfDebtors.html">Реестр должников</a>
+                <a class="menu-item" href="#">Статистика</a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <div class="file-section">
+                <input type="text" class="file-name" value="Выписка_92039024930940535095" readonly>
+                <button class="upload-button">Загрузите файл</button>
+                <input type="file" class="file-input" style="display: none;" accept=".xls,.xlsx">
+            </div>
+
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Выбытие денег (дебит)</th>
+                            <th>Поступление денег (кредит)</th>
+                            <th>Наименование операции</th>
+                            <th>Номер в АИСОИП</th>
+                            <th>Должник</th>
+                            <th>Взыскатель</th>
+                            <th>Оплата ЧСИ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Пример строки -->
+                        <tr>
+                            <td>12.06.2025</td>
+                            <td>100,000.00</td>
+                            <td>100,000.00</td>
+                            <td>ИНОЕ</td>
+                            <td>1234567890</td>
+                            <td>А. Ааааааа</td>
+                            <td>ТОО “ABC”</td>
+                            <td>1234567890</td>
+                        </tr>
+                        <!-- Скопируйте или сгенерируйте остальные строки -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+        <!-- JS -->
+        <script src="accounting.js"></script>
+</body>
+
+</html>

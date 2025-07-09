@@ -1,0 +1,162 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background-color: #0b5d84;
+}
+
+.menu-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.login-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+.email {
+    font-weight: bold;
+    color: white;
+}
+
+.subscription {
+    font-size: 12px;
+    color: #FF696B;
+}
+
+.person-icon {
+    width: 60px;
+    height: 60px;
+}
+
+
+.subscription-text {
+    font-size: 14px;
+    color: gray;
+}
+
+.container {
+    display: flex;
+    height: calc(100vh - 64px);
+    /* subtract topbar height */
+    overflow: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    background-color: #0b5d84;
+    width: 250px;
+    color: white;
+    padding: 20px;
+    transition: transform 0.3s ease;
+}
+
+.sidebar.hidden {
+    transform: translateX(-100%);
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.menu-item {
+    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    text-decoration: none;
+}
+
+.menu-item.active{
+    font-weight: bold;
+    font-size: 18px;
+    color: #a2e4ff;
+    text-decoration: none;
+}
+
+.with-children {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.submenu {
+    display: flex;
+    flex-direction: column;
+    margin-left: 16px;
+    gap: 10px;
+}
+
+.submenu a {
+    font-size: 16px;
+    font-weight: normal;
+    color: white;
+    text-decoration: none;
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+    padding-left: 10px;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.content {
+    flex: 1;
+    padding: 40px;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: start;
+}
+
+.search-section {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: 2px solid #aaa;
+    border-radius: 6px;
+    outline: none;
+}
+
+.search-input::placeholder {
+    color: #999;
+}
+
+.search-button {
+    padding: 12px 24px;
+    background-color: #005b94;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: #00487a;
+}

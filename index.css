@@ -161,6 +161,10 @@ body {
     color: white;
 }
 
+#openCalendar:hover {
+    background-color: #00487a;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -267,3 +271,62 @@ th, td {
 }
 
 
+#dateRange {
+    padding: 10px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 240px;
+}
+
+
+.employee-select {
+    position: relative;
+    display: inline-block;
+}
+
+#employeeInput {
+    margin-top: 8px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 240px;
+}
+
+#openEmployeeMenu {
+    padding: 10px 14px;
+    background-color: #005b94;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-bottom: 4px;
+}
+
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 240px;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f0f0;
+}
+
+.hidden {
+    display: none;
+}

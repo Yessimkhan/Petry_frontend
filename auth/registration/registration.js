@@ -43,7 +43,7 @@ form.addEventListener('submit', async function (e) {
 
         if (response.ok) {
             alert('Регистрация прошла успешно! Теперь вы можете войти в систему.');
-            window.location.href = '../../index.html';
+            window.location.href = '../login/login.html'; // Перенаправление на страницу входа
         } else {
             console.error(result);
             alert(result.detail || 'Ошибка при регистрации');
