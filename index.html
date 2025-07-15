@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 
-<!-- Flatpickr JS -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
 <body>
     <!-- Top Bar -->
     <header class="topbar">
@@ -34,7 +31,8 @@
         <!-- Sidebar -->
         <aside class="sidebar hidden" id="sidebar">
             <nav class="menu">
-                <a class="menu-item active" href="index.html" data-page="Автоподпись"> Автоподпись исполнительных производств</a>
+                <a class="menu-item active" href="index.html" data-page="Автоподпись"> Автоподпись исполнительных
+                    производств</a>
                 <div class="menu-item with-children">
                     <span>Действия ЧСИ</span>
                     <div class="submenu">
@@ -63,7 +61,7 @@
             <!-- Filters -->
             <div class="filters">
                 <button id="openCalendar">Выберите период</button>
-                <input id="dateRange" type="text" placeholder="дд/мм/гггг - дд/мм/гггг">
+                <input id="dateRange" type="text" placeholder="гггг/мм/дд - гггг/мм/дд">
 
                 <div class="employee-select">
                     <button id="openEmployeeMenu">Выбор сотрудника</button>
@@ -75,8 +73,8 @@
                         <div class="dropdown-item">В. Ввввввв</div>
                     </div>
                 </div>
+                <button id="loadReport">Получить отчет</button>
             </div>
-
 
             <!-- Table -->
             <table>
@@ -132,7 +130,12 @@
     </div>
 
     <!-- JS -->
-    <script src="index.js"></script>
+    <script type="module" src="index.js"></script>
+
+    <div id="overlayLoader" class="overlay-loader hidden">
+        <div class="spinner"></div>
+    </div>
+
 </body>
 
 </html>

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Запросы</title>
     <link rel="stylesheet" href="requests.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         .checklist-columns {
             display: flex;
@@ -55,162 +56,480 @@
         <main class="main">
             <div class="filter-buttons" style="margin-bottom: 10px;">
                 <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button>Отправка всех</button>
-                    <button>Отправка 1го ИП</button>
-                    <button>По категории и по периоду</button>
+                    <button class="segment-button active" data-target="view-all">Отправка всех</button>
+                    <button class="segment-button" data-target="view-one">Отправка 1го ИП</button>
+                    <button class="segment-button" data-target="view-filtered">По категории и по периоду</button>
                 </div>
             </div>
 
-            <h3 style="color:#0b5d84">Исполнительное производство: 0902994050767</h3>
+            <div id="view-all" class="segment-view active">
+                <!-- Данные о ФЛ и ЮЛ -->
+                <div class="button-group">
+                    <button id="selectAllBtn">Выбрать всё</button>
+                    <button class="sendSelectedBtn">Отправить</button>
+                </div>
 
-            <div class="filters" style="margin-bottom: 10px;">
-                <input type="text" placeholder="Введите номер Исполнительного производства...">
-                <button>Поиск</button>
+                <details open>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Данные о ФЛ и ЮЛ</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Сведения о физическом лице <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Фото из системы документирования населения <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Форма 1 из системы документирования населения <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Записи актов гражданского состояния <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Инвалидность <a href="#">⬇</a></li>
+                        </ul>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Водительское удостоверение <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Рынок труда <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Иностранная рабочая сила <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Адм. правонарушения дорожного движения <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Адм. правонарушения дорожного движения (Name) <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Адм. правонарушения иностранных граждан <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Иммущество -->
+                <details open>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Иммушество</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Регистр недвижимости супруг/филиал <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Регистр недвижимости <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Транспортные средства <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Земельный участок <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Сельхозтехника <a href="#">⬇</a></li>
+                        </ul>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Зарегистрированное оружие <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Речные суда ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Морские суда ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> ЖД транспорт ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Криминальное авто <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Финансы -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Финансы</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Налоговая задолженность <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Обязательные пенсионные отчисления <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Выплата пенсий и пособий <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Соц. Помощи <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Платежи в бюджет <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Розыск -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Розыск</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox" checked> ФЛ и ЮЛ, розыскные карточки <a href="#">⬇</a></li>
+                            <li><input type="checkbox" checked> Верховный суд <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Земельный участок (инф. для ареста) <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Розыск преступников <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Розыск без вести пропавших <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Иные -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Иные</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Полученные услуги в ЦОН <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Казахтелеком <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Қазақстан теміржолы <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Е-лицензирование <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Выполнение гос.функций <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Участники внешнеэкономической деятельности <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Е-Нотариат <a href="#">⬇</a></li>
+                        </ul>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Пассажирские ТД <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Транспортные ТД ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Запрос требования <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Судебные карточки <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Не выдворенные иностранцы <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Учредители <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Досье -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Досье</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Все запросы <a href="#">⬇</a></li>
+                    </ul>
+                </details>
+            </div>
+            <div id="view-one" class="segment-view hidden">
+                <h3 id="executionTitle" style="color:#0b5d84">Исполнительное производство: </h3>
+
+                <div class="filters" style="margin-bottom: 10px;">
+                    <input id="executionInput" type="text" placeholder="Введите номер Исполнительного производства...">
+                    <button id="searchExecutionBtn">Поиск</button>
+                    <button class="sendSelectedBtn">Отправить</button>
+                </div>
+
+                <!-- Данные о ФЛ и ЮЛ -->
+                <details open>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Данные о ФЛ и ЮЛ</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Сведения о физическом лице <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Фото из системы документирования населения <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Форма 1 из системы документирования населения <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Записи актов гражданского состояния <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Инвалидность <a href="#">⬇</a></li>
+                        </ul>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Водительское удостоверение <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Рынок труда <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Иностранная рабочая сила <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Адм. правонарушения дорожного движения <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Адм. правонарушения дорожного движения (Name) <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Адм. правонарушения иностранных граждан <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Иммущество -->
+                <details open>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Иммушество</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Регистр недвижимости супруг/филиал <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Регистр недвижимости <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Транспортные средства <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Земельный участок <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Сельхозтехника <a href="#">⬇</a></li>
+                        </ul>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Зарегистрированное оружие <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Речные суда ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Морские суда ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> ЖД транспорт ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Криминальное авто <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Финансы -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Финансы</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Налоговая задолженность <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Обязательные пенсионные отчисления <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Выплата пенсий и пособий <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Соц. Помощи <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Платежи в бюджет <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Розыск -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Розыск</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox" checked> ФЛ и ЮЛ, розыскные карточки <a href="#">⬇</a></li>
+                            <li><input type="checkbox" checked> Верховный суд <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Земельный участок (инф. для ареста) <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Розыск преступников <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Розыск без вести пропавших <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Иные -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Иные</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Полученные услуги в ЦОН <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Казахтелеком <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Қазақстан теміржолы <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Е-лицензирование <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Выполнение гос.функций <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Участники внешнеэкономической деятельности <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Е-Нотариат <a href="#">⬇</a></li>
+                        </ul>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Пассажирские ТД <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Транспортные ТД ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Запрос требования <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Судебные карточки <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Не выдворенные иностранцы <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Учредители <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Досье -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Досье</span>
+                        <span class="summary-right">
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Все запросы <a href="#">⬇</a></li>
+                    </ul>
+                </details>
             </div>
 
-            <!-- Данные о ФЛ и ЮЛ -->
-            <details open>
-                <summary class="summary-with-count">
-                    <span class="summary-title">Данные о ФЛ и ЮЛ</span>
-                    <span class="summary-right">
-                        <span class="check-count">0/0</span>
-                        <span class="arrow">▼</span>
-                    </span>
-                </summary>
-                <div class="checklist-columns">
-                    <ul class="checklist">
-                        <li><input type="checkbox" checked> Сведения о физическом лице <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Фото из системы документирования населения <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Форма 1 из системы документирования населения <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Записи актов гражданского состояния <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Инвалидность <a href="#">⬇</a></li>
-                    </ul>
-                    <ul class="checklist">
-                        <li><input type="checkbox"> Водительское удостоверение <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Рынок труда <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Иностранная рабочая сила <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Адм. правонарушения дорожного движения <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Адм. правонарушения дорожного движения (Name) <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Адм. правонарушения иностранных граждан <a href="#">⬇</a></li>
-                    </ul>
-                </div>
-            </details>
+            <div id="view-filtered" class="segment-view hidden">
 
-            <!-- Иммущество -->
-            <details open>
-                <summary class="summary-with-count">
-                    <span class="summary-title">Иммушество</span>
-                    <span class="summary-right">
-                        <span class="check-count">0/0</span>
-                        <span class="arrow">▼</span>
-                    </span>
-                </summary>
-                <div class="checklist-columns">
-                    <ul class="checklist">
-                        <li><input type="checkbox" checked> Регистр недвижимости супруг/филиал <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Регистр недвижимости <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Транспортные средства <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Земельный участок <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Сельхозтехника <a href="#">⬇</a></li>
-                    </ul>
-                    <ul class="checklist">
-                        <li><input type="checkbox" checked> Зарегистрированное оружие <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Речные суда ФЛ <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Морские суда ФЛ <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> ЖД транспорт ФЛ <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Криминальное авто <a href="#">⬇</a></li>
-                    </ul>
-                </div>
-            </details>
+                <div class="filters">
+                    <button id="openCalendar">Выберите период</button>
+                    <input id="dateRange" type="text" placeholder="гггг/мм/дд - гггг/мм/дд">
 
-            <!-- Финансы -->
-            <details>
-                <summary class="summary-with-count">
-                    <span class="summary-title">Финансы</span>
-                    <span class="summary-right">
-                        <span class="check-count">0/0</span>
-                        <span class="arrow">▼</span>
-                    </span>
-                </summary>
-                <div class="checklist-columns">
-                    <ul class="checklist">
-                        <li><input type="checkbox"> Налоговая задолженность <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Обязательные пенсионные отчисления <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Выплата пенсий и пособий <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Соц. Помощи <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Платежи в бюджет <a href="#">⬇</a></li>
-                    </ul>
+                    <button class="sendSelectedBtn">Отправить</button>
                 </div>
-            </details>
+                <!-- Данные о ФЛ и ЮЛ -->
+                <details open>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Данные о ФЛ и ЮЛ</span>
+                        <span class="summary-right">
+                            <button class="select-category-btn" type="button">Всё</button>
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Сведения о физическом лице <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Фото из системы документирования населения <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Форма 1 из системы документирования населения <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Записи актов гражданского состояния <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Инвалидность <a href="#">⬇</a></li>
+                        </ul>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Водительское удостоверение <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Рынок труда <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Иностранная рабочая сила <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Адм. правонарушения дорожного движения <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Адм. правонарушения дорожного движения (Name) <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Адм. правонарушения иностранных граждан <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
 
-            <!-- Розыск -->
-            <details>
-                <summary class="summary-with-count">
-                    <span class="summary-title">Розыск</span>
-                    <span class="summary-right">
-                        <span class="check-count">0/0</span>
-                        <span class="arrow">▼</span>
-                    </span>
-                </summary>
-                <div class="checklist-columns">
-                    <ul class="checklist">
-                        <li><input type="checkbox" checked> ФЛ и ЮЛ, розыскные карточки <a href="#">⬇</a></li>
-                        <li><input type="checkbox" checked> Верховный суд <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Земельный участок (инф. для ареста) <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Розыск преступников <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Розыск без вести пропавших <a href="#">⬇</a></li>
-                    </ul>
-                </div>
-            </details>
+                <!-- Иммущество -->
+                <details open>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Иммушество</span>
+                        <span class="summary-right">
+                            <button class="select-category-btn" type="button">Всё</button>
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Регистр недвижимости супруг/филиал <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Регистр недвижимости <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Транспортные средства <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Земельный участок <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Сельхозтехника <a href="#">⬇</a></li>
+                        </ul>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Зарегистрированное оружие <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Речные суда ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Морские суда ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> ЖД транспорт ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Криминальное авто <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
 
-            <!-- Иные -->
-            <details>
-                <summary class="summary-with-count">
-                    <span class="summary-title">Иные</span>
-                    <span class="summary-right">
-                        <span class="check-count">0/0</span>
-                        <span class="arrow">▼</span>
-                    </span>
-                </summary>
-                <div class="checklist-columns">
-                    <ul class="checklist">
-                        <li><input type="checkbox"> Полученные услуги в ЦОН <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Казахтелеком <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Қазақстан теміржолы <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Е-лицензирование <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Выполнение гос.функций <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Участники внешнеэкономической деятельности <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Е-Нотариат <a href="#">⬇</a></li>
-                    </ul>
-                    <ul class="checklist">
-                        <li><input type="checkbox"> Пассажирские ТД <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Транспортные ТД ФЛ <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Запрос требования <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Судебные карточки <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Не выдворенные иностранцы <a href="#">⬇</a></li>
-                        <li><input type="checkbox"> Учредители <a href="#">⬇</a></li>
-                    </ul>
-                </div>
-            </details>
+                <!-- Финансы -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Финансы</span>
+                        <span class="summary-right">
+                            <button class="select-category-btn" type="button">Всё</button>
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Налоговая задолженность <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Обязательные пенсионные отчисления <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Выплата пенсий и пособий <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Соц. Помощи <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Платежи в бюджет <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
 
-            <!-- Досье -->
-            <details>
-                <summary class="summary-with-count">
-                    <span class="summary-title">Досье</span>
-                    <span class="summary-right">
-                        <span class="check-count">0/0</span>
-                        <span class="arrow">▼</span>
-                    </span>
-                </summary>
-                <ul class="checklist">
-                    <li><input type="checkbox" checked> Все запросы <a href="#">⬇</a></li>
-                </ul>
-            </details>
+                <!-- Розыск -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Розыск</span>
+                        <span class="summary-right">
+                            <button class="select-category-btn" type="button">Всё</button>
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox" checked> ФЛ и ЮЛ, розыскные карточки <a href="#">⬇</a></li>
+                            <li><input type="checkbox" checked> Верховный суд <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Земельный участок (инф. для ареста) <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Розыск преступников <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Розыск без вести пропавших <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Иные -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Иные</span>
+                        <span class="summary-right">
+                            <button class="select-category-btn" type="button">Всё</button>
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <div class="checklist-columns">
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Полученные услуги в ЦОН <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Казахтелеком <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Қазақстан теміржолы <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Е-лицензирование <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Выполнение гос.функций <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Участники внешнеэкономической деятельности <a href="#">⬇</a>
+                            </li>
+                            <li><input type="checkbox"> Е-Нотариат <a href="#">⬇</a></li>
+                        </ul>
+                        <ul class="checklist">
+                            <li><input type="checkbox"> Пассажирские ТД <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Транспортные ТД ФЛ <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Запрос требования <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Судебные карточки <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Не выдворенные иностранцы <a href="#">⬇</a></li>
+                            <li><input type="checkbox"> Учредители <a href="#">⬇</a></li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Досье -->
+                <details>
+                    <summary class="summary-with-count">
+                        <span class="summary-title">Досье</span>
+                        <span class="summary-right">
+                            <button class="select-category-btn" type="button">Всё</button>
+                            <span class="check-count">0/0</span>
+                            <span class="arrow">▼</span>
+                        </span>
+                    </summary>
+                    <ul class="checklist">
+                        <li><input type="checkbox"> Все запросы <a href="#">⬇</a></li>
+                    </ul>
+                </details>
+            </div>
         </main>
     </div>
 
+    <div id="overlayLoader" class="overlay-loader hidden">
+        <div class="spinner"></div>
+    </div>
+
     <!-- JS -->
-    <script src="requests.js"></script>
+    <script type="module" src="requests.js"></script>
 </body>
 
 </html>

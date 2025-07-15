@@ -1,3 +1,4 @@
+import { API_URL } from '../../config.js';
 const loginForm = document.querySelector('.login-form');
 
 loginForm.addEventListener('submit', async function (e) {
@@ -7,9 +8,9 @@ loginForm.addEventListener('submit', async function (e) {
     const password = loginForm.querySelector('input[type="password"]').value;
 
     try {
-        const url = 'https://petryapi.sdutechnopark.kz/api/auth/login/';
+        const loginUrl = `${API_URL}/auth/login/`;
 
-        const response = await fetch(url, {
+        const response = await fetch(loginUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -19,16 +20,14 @@ loginForm.addEventListener('submit', async function (e) {
 
         const result = await response.json();
 
-        // После успешного входа:
         if (response.ok) {
             console.log('✅ Успешный вход:', result);
 
-            // Сохраняем токены
             localStorage.setItem('access_token', result.access);
             localStorage.setItem('refresh_token', result.refresh);
 
-            // Получаем данные пользователя
-            const userResponse = await fetch('https://petryapi.sdutechnopark.kz/api/auth/me/', {
+            const meUrl = `${API_URL}/auth/me/`;
+            const userResponse = await fetch(meUrl, {
                 method: 'GET',
                 headers: {
                     'Authorization': 'Bearer ' + result.access,
@@ -38,9 +37,9 @@ loginForm.addEventListener('submit', async function (e) {
 
             const user = await userResponse.json();
             console.log('👤 Пользователь:', user);
+
             window.location.href = '../../index.html';
-        }
-        else {
+        } else {
             alert(result.detail || 'Ошибка входа');
         }
     } catch (error) {

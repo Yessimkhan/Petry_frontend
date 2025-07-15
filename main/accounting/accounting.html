@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accounting</title>
     <link rel="stylesheet" href="accounting.css">
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 
 <body>
@@ -47,11 +48,10 @@
         <!-- Main Content -->
         <main class="content">
             <div class="file-section">
-                <input type="text" class="file-name" value="Выписка_92039024930940535095" readonly>
+                <input type="text" class="file-name" value="file-name.xlsx" readonly>
                 <button class="upload-button">Загрузите файл</button>
                 <input type="file" class="file-input" style="display: none;" accept=".xls,.xlsx">
             </div>
-
 
             <div class="table-container">
                 <table>
@@ -68,18 +68,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <!-- Пример строки -->
-                        <tr>
-                            <td>12.06.2025</td>
-                            <td>100,000.00</td>
-                            <td>100,000.00</td>
-                            <td>ИНОЕ</td>
-                            <td>1234567890</td>
-                            <td>А. Ааааааа</td>
-                            <td>ТОО “ABC”</td>
-                            <td>1234567890</td>
-                        </tr>
-                        <!-- Скопируйте или сгенерируйте остальные строки -->
+                        
                     </tbody>
                 </table>
             </div>
