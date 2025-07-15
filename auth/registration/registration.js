@@ -1,3 +1,5 @@
+import { API_URL } from '../../config.js';
+
 const form = document.querySelector('.register-form');
 const agreeCheckbox = document.getElementById('agree');
 
@@ -23,7 +25,8 @@ form.addEventListener('submit', async function (e) {
     }
 
     try {
-        const response = await fetch('https://petryapi.sdutechnopark.kz/api/auth/register/', {
+        const regUrl = `${API_URL}/auth/register/`;
+        const response = await fetch(regUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
