@@ -107,6 +107,35 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+const mockData = [
+    {
+        category: 'Распределенные',
+        initial_count: 15,
+        started: 10,
+        in_progress: 25,
+        stopped: 5,
+        returned: 3,
+        employee: 'Иванов И.И.'
+    },
+    {
+        category: 'Не распределенные',
+        initial_count: 8,
+        started: 4,
+        in_progress: 12,
+        stopped: 2,
+        returned: 1,
+        employee: 'Петров П.П.'
+    },
+    {
+        category: 'Общее количество',
+        initial_count: 23,
+        started: 14,
+        in_progress: 37,
+        stopped: 7,
+        returned: 4,
+    }
+];
+
 async function fetchReportSummary(startDate, endDate, assistantId) {
     const token = localStorage.getItem('access_token');
     if (!token) {
@@ -143,12 +172,12 @@ async function fetchReportSummary(startDate, endDate, assistantId) {
             const errorMsg = result.message || result.detail || `Ошибка ${response.status}`;
             console.error('Ошибка HTTP:', response.status, errorMsg);
             setTimeout(() => {
-                alert(errorMsg);
+                showPopup(errorMsg);
             }, 50);
             return;
         }
-
-        updateReportTable(result);
+        showPopup('Отчет успешно загружен');
+        updateReportTable(mockData);
 
     } catch (error) {
         console.error('Ошибка загрузки отчета:', error);
@@ -156,22 +185,15 @@ async function fetchReportSummary(startDate, endDate, assistantId) {
         button.disabled = false;
 
         setTimeout(() => {
-            alert('Ошибка загрузки отчета');
+            showPopup('Ошибка загрузки отчета');
         }, 50);
     }
 }
 
 function updateReportTable(data) {
+    console.log('Обновление таблицы отчета с данными:', data);
     const tbody = document.querySelector('tbody');
     tbody.innerHTML = ''; // Очистить старые данные
-
-    let total = {
-        initial_count: 0,
-        started: 0,
-        in_progress: 0,
-        stopped: 0,
-        returned: 0
-    };
 
     data.forEach(item => {
         const row = document.createElement('tr');
@@ -185,26 +207,7 @@ function updateReportTable(data) {
             <td>${item.employee || ''}</td>
         `;
         tbody.appendChild(row);
-
-        // Суммируем значения
-        total.initial_count += item.initial_count;
-        total.started += item.started;
-        total.in_progress += item.in_progress;
-        total.stopped += item.stopped;
-        total.returned += item.returned;
     });
-
-    // Итоговая строка
-    const totalRow = document.createElement('tr');
-    totalRow.innerHTML = `
-        <td><strong>Общее</strong></td>
-        <td><strong>${total.initial_count}</strong></td>
-        <td><strong>${total.started}</strong></td>
-        <td><strong>${total.in_progress}</strong></td>
-        <td><strong>${total.stopped}</strong></td>
-        <td><strong>${total.returned}</strong></td>
-    `;
-    tbody.appendChild(totalRow);
 }
 
 
@@ -214,7 +217,7 @@ document.getElementById("loadReport").addEventListener("click", function () {
     const employeeId = employeeInput.dataset.id || null;
 
     if (!dateRange) {
-        alert("Выберите диапазон дат");
+        showPopup("Выберите диапазон дат");
         return;
     }
 
@@ -297,34 +300,50 @@ function populateEmployeeDropdown(assistants) {
 fetchAssistants();
 
 
-function updateProgress(percent) {
-    const circle = document.getElementById('progressCircle');
-    const percentText = document.getElementById('progressPercent');
-    const statusText = document.getElementById('progressText');
+// function updateProgress(percent) {
+//     const circle = document.getElementById('progressCircle');
+//     const percentText = document.getElementById('progressPercent');
+//     const statusText = document.getElementById('progressText');
 
-    // Ограничиваем значения от 0 до 100
-    const safePercent = Math.max(0, Math.min(percent, 100));
+//     // Ограничиваем значения от 0 до 100
+//     const safePercent = Math.max(0, Math.min(percent, 100));
 
-    // Обновляем текст
-    percentText.textContent = `${safePercent}%`;
+//     // Обновляем текст
+//     percentText.textContent = `${safePercent}%`;
 
-    // Обновляем цвет круга
-    circle.style.background = `conic-gradient(#03a9f4 0% ${safePercent}%, #0b5d84 ${safePercent}% 100%)`;
+//     // Обновляем цвет круга
+//     circle.style.background = `conic-gradient(#03a9f4 0% ${safePercent}%, #0b5d84 ${safePercent}% 100%)`;
 
-    // Обновляем текст статуса
-    if (safePercent === 100) {
-        statusText.textContent = 'Завершено';
-    } else if (safePercent === 0) {
-        statusText.textContent = 'Ожидает начала...';
-    } else {
-        statusText.textContent = 'Выполняется автоподпись…';
+//     // Обновляем текст статуса
+//     if (safePercent === 100) {
+//         statusText.textContent = 'Завершено';
+//     } else if (safePercent === 0) {
+//         statusText.textContent = 'Ожидает начала...';
+//     } else {
+//         statusText.textContent = 'Выполняется автоподпись…';
+//     }
+// }
+
+// // Пример анимации: от 0 до 100
+// let progress = 0;
+// const interval = setInterval(() => {
+//     updateProgress(progress);
+//     progress += 1;
+//     if (progress > 100) clearInterval(interval);
+// }, 100); // 100ms шаг
+
+function showPopup(message) {
+    const popup = document.getElementById('customAlert');
+    const messageEl = document.getElementById('customAlertMessage');
+    const closeBtn = document.getElementById('customAlertClose');
+
+    if (!popup || !messageEl || !closeBtn) {
+        console.warn('❗ popup elements not found');
+        return;
     }
-}
 
-// Пример анимации: от 0 до 100
-let progress = 0;
-const interval = setInterval(() => {
-    updateProgress(progress);
-    progress += 1;
-    if (progress > 100) clearInterval(interval);
-}, 100);
+    messageEl.textContent = message;
+    popup.classList.remove('hidden');
+
+    closeBtn.onclick = () => popup.classList.add('hidden');
+}
