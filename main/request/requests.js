@@ -209,7 +209,7 @@ document.querySelectorAll('.sendSelectedBtn').forEach(button => {
                     console.error('Ошибка при разборе JSON ответа', e);
                 }
 
-                console.error('HTTP ошибка:', response.status, userFriendlyMessage);
+                console.error('HTTP ошибка:', response.status);
                 setTimeout(() => {
                     showPopup(userFriendlyMessage);
                 }, 50);

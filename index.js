@@ -169,10 +169,39 @@ async function fetchReportSummary(startDate, endDate, assistantId) {
         button.disabled = false;
 
         if (!response.ok) {
-            const errorMsg = result.message || result.detail || `Ошибка ${response.status}`;
-            console.error('Ошибка HTTP:', response.status, errorMsg);
+            let userFriendlyMessage = 'Произошла ошибка. Пожалуйста, попробуйте позже.';
+
+            try {
+                const result = await response.json();
+                const rawMessage = result.message || result.detail || response.statusText;
+
+                // Преобразуем известные ошибки в более понятные тексты
+                switch (response.status) {
+                    case 400:
+                        userFriendlyMessage = 'Неверный запрос. Проверьте введённые данные.';
+                        break;
+                    case 401:
+                        userFriendlyMessage = 'Вы не авторизованы. Пожалуйста, войдите в систему.';
+                        break;
+                    case 403:
+                        userFriendlyMessage = 'У вас нет доступа к этому ресурсу.';
+                        break;
+                    case 404:
+                        userFriendlyMessage = 'Ресурс не найден.';
+                        break;
+                    case 500:
+                        userFriendlyMessage = 'Внутренняя ошибка сервера. Попробуйте позже.';
+                        break;
+                    default:
+                        userFriendlyMessage = rawMessage || userFriendlyMessage;
+                }
+            } catch (e) {
+                console.error('Ошибка при разборе JSON ответа', e);
+            }
+
+            console.error('HTTP ошибка:', response.status);
             setTimeout(() => {
-                showPopup(errorMsg);
+                showPopup(userFriendlyMessage);
             }, 50);
             return;
         }
