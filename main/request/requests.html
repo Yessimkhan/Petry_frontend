@@ -524,9 +524,21 @@
         </main>
     </div>
 
-    <div id="overlayLoader" class="overlay-loader hidden">
-        <div class="spinner"></div>
+    <div id="customAlert" class="hidden">
+        <div class="popup-content">
+            <p id="customAlertMessage"></p>
+            <button id="customAlertClose">OK</button>
+        </div>
     </div>
+
+    <div id="overlayLoader" class="overlay-loader hidden">
+        <div style="text-align: center;">
+            <div class="spinner" style="margin: 0 auto;"></div>
+            <div style="margin-top: 12px; color: #0b5d84; font-size: 16px; font-weight: bold;">Загрузка...</div>
+        </div>
+    </div>
+
+
 
     <!-- JS -->
     <script type="module" src="requests.js"></script>

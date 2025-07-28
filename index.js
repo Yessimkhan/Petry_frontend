@@ -295,3 +295,36 @@ function populateEmployeeDropdown(assistants) {
 
 
 fetchAssistants();
+
+
+function updateProgress(percent) {
+    const circle = document.getElementById('progressCircle');
+    const percentText = document.getElementById('progressPercent');
+    const statusText = document.getElementById('progressText');
+
+    // Ограничиваем значения от 0 до 100
+    const safePercent = Math.max(0, Math.min(percent, 100));
+
+    // Обновляем текст
+    percentText.textContent = `${safePercent}%`;
+
+    // Обновляем цвет круга
+    circle.style.background = `conic-gradient(#03a9f4 0% ${safePercent}%, #0b5d84 ${safePercent}% 100%)`;
+
+    // Обновляем текст статуса
+    if (safePercent === 100) {
+        statusText.textContent = 'Завершено';
+    } else if (safePercent === 0) {
+        statusText.textContent = 'Ожидает начала...';
+    } else {
+        statusText.textContent = 'Выполняется автоподпись…';
+    }
+}
+
+// Пример анимации: от 0 до 100
+let progress = 0;
+const interval = setInterval(() => {
+    updateProgress(progress);
+    progress += 1;
+    if (progress > 100) clearInterval(interval);
+}, 100);

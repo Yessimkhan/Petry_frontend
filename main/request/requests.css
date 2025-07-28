@@ -238,23 +238,23 @@ details {
     width: 100%;
     height: 100%;
     background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 9999;
+    z-index: 10000;
 }
 
 .spinner {
-    border: 6px solid #f3f3f3;
-    border-top: 6px solid #0b5d84;
+    width: 60px;
+    height: 60px;
+    border: 6px solid #e0e0e0; /* light gray background ring */
+    border-top-color: #0b5d84; /* main color */
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 0.8s linear infinite;
+    animation: spinner-spin 0.8s ease-in-out infinite;
 }
 
-@keyframes spin {
+@keyframes spinner-spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
@@ -356,4 +356,54 @@ details {
     font-size: 14px;
     cursor: pointer;
     transition: background-color 0.2s ease;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+#customAlert {
+  position: fixed;
+  inset: 0; /* top: 0; right: 0; bottom: 0; left: 0 */
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+#customAlert.hidden {
+  display: none !important;
+}
+
+#customAlert .popup-content {
+  background: white;
+  padding: 24px;
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  max-width: 90%;
+  text-align: center;
+}
+
+#customAlertMessage {
+  color: #333;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+#customAlertClose {
+  background-color: #0b5d84;
+  color: white;
+  padding: 10px 16px;
+  font-size: 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+}
+
+#customAlertClose:hover {
+  background-color: #094b6a;
 }

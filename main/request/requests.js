@@ -71,7 +71,7 @@ fetchUser();
 function collectSelectedData() {
     const activeSegment = document.querySelector('.segment-view:not(.hidden)');
     if (!activeSegment) {
-        alert("Нет активного сегмента");
+        showPopup("Нет активного сегмента");
         return null;
     }
 
@@ -109,13 +109,13 @@ function collectSelectedData() {
     if (segmentId === "view-filtered") {
         const dateInput = document.getElementById("dateRange")?.value.trim();
         if (!dateInput) {
-            alert("Вы должны выбрать период.");
+            showPopup("Вы должны выбрать период.");
             return null;
         }
 
         const [period_start, period_end] = dateInput.split(" - ").map(d => d.trim());
         if (!period_start || !period_end) {
-            alert("Формат периода некорректен. Используйте: гггг/мм/дд - гггг/мм/дд");
+            showPopup("Формат периода некорректен. Используйте: гггг/мм/дд - гггг/мм/дд");
             return null;
         }
 
@@ -134,7 +134,8 @@ function collectSelectedData() {
         const production_id = productionIdMatch ? productionIdMatch[1].trim() : null;
 
         if (!production_id) {
-            alert("Вы должны указать исполнительное производство (production_id).");
+            console.log("production_id не найден в заголовке");
+            showPopup("Вы должны указать исполнительное производство (production_id).");
             return null;
         }
 
@@ -144,7 +145,7 @@ function collectSelectedData() {
         };
     }
 
-    alert("Неизвестный сегмент.");
+    showPopup("Неизвестный сегмент.");
     return null;
 }
 
@@ -181,14 +182,14 @@ document.querySelectorAll('.sendSelectedBtn').forEach(button => {
                 const errorMsg = result.message || result.detail || `Ошибка ${response.status}`;
                 console.error('Ошибка HTTP:', response.status, errorMsg);
                 setTimeout(() => {
-                    alert(errorMsg);
+                    showPopup(errorMsg);
                 }, 50);
                 return;
             }
 
             console.log('Ответ сервера:', result);
             setTimeout(() => {
-                alert(result.message ?? 'Успешно отправлено');
+                showPopup(result.message ?? 'Успешно отправлено');
             }, 50);
 
         } catch (error) {
@@ -196,7 +197,7 @@ document.querySelectorAll('.sendSelectedBtn').forEach(button => {
             overlay.classList.add('hidden');
 
             setTimeout(() => {
-                alert('Ошибка при отправке');
+                showPopup('Ошибка при отправке');
             }, 50);
         }
     });
@@ -313,7 +314,7 @@ document.querySelectorAll('.select-category-btn').forEach(btn => {
 document.getElementById('searchExecutionBtn').addEventListener('click', async () => {
     const caseNumber = document.getElementById('executionInput').value.trim();
     if (!caseNumber) {
-        alert('Введите номер исполнительного производства');
+        showPopup('Введите номер исполнительного производства');
         return;
     }
 
@@ -339,10 +340,26 @@ document.getElementById('searchExecutionBtn').addEventListener('click', async ()
         if (response.ok && result.message) {
             document.getElementById('executionTitle').textContent = `Исполнительное производство: ${caseNumber}`;
         } else {
-            alert(result.message || 'Произошла ошибка при поиске');
+            showPopup(result.message || 'Произошла ошибка при поиске');
         }
     } catch (error) {
         console.error('Ошибка при поиске:', error);
-        alert('Ошибка сети или сервера');
+        showPopup('Ошибка сети или сервера');
     }
 });
+
+function showPopup(message) {
+    const popup = document.getElementById('customAlert');
+    const messageEl = document.getElementById('customAlertMessage');
+    const closeBtn = document.getElementById('customAlertClose');
+
+    if (!popup || !messageEl || !closeBtn) {
+        console.warn('❗ popup elements not found');
+        return;
+    }
+
+    messageEl.textContent = message;
+    popup.classList.remove('hidden');
+
+    closeBtn.onclick = () => popup.classList.add('hidden');
+}
