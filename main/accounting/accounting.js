@@ -97,20 +97,17 @@ function readExcelFile(file) {
                         <th>ИП</th>
                         <th>Сумма Дебит</th>
                         <th>Сумма Кредит</th>
-                        <th>Итого</th>
                     </tr>
                 </thead>
                 <tbody>
         `;
 
         Object.entries(ipTotals).forEach(([ip, sums]) => {
-            const total = sums.debit + sums.credit;
             summaryHTML += `
                 <tr>
                     <td>${ip}</td>
                     <td>${sums.debit.toFixed(2)}</td>
                     <td>${sums.credit.toFixed(2)}</td>
-                    <td>${total.toFixed(2)}</td>
                 </tr>
             `;
         });
