@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Accounting</title>
     <link rel="stylesheet" href="accounting.css">
+    <link rel="stylesheet" href="../../footer.css" />
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 </head>
 
@@ -17,7 +18,7 @@
             <div class="user-info">
                 <div class="email">abcabc@gmail.com</div>
             </div>
-            <a href="main/profile/profile.html">
+            <a href="../profile/profile.html">
                 <img src="../../assets/person-icon.svg" alt="Profile" class="person-icon" />
             </a>
         </div>
@@ -30,7 +31,7 @@
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <nav class="menu">
-                <a class="menu-item" href="../../index.html">Автоподпись исполнительных производств</a>
+                <a class="menu-item" href="../../index.html">RPA TEZ ATQARU</a>
                 <div class="menu-item with-children">
                     <span>Действия ЧСИ</span>
                     <div class="submenu">
@@ -41,7 +42,7 @@
 
                 <a class="menu-item active" href="#">Бухгалтерия</a>
                 <a class="menu-item" href="../registerOfDebtors/registerOfDebtors.html">Реестр должников</a>
-                <a class="menu-item" href="#">Статистика</a>
+                <a class="menu-item" href="../statistics/statistics.html">Статистика</a>
             </nav>
         </aside>
 
@@ -68,13 +69,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        
+
                     </tbody>
                 </table>
             </div>
+
+            <div id="summary-container"></div>
         </main>
-        <!-- JS -->
-        <script src="accounting.js"></script>
+    </div>
+    <div id="footer-container"></div>
+    <!-- JS -->
+    <script src="accounting.js"></script>
 </body>
 
 </html>

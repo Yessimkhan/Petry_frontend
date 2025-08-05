@@ -1,0 +1,57 @@
+.footer {
+  background-color: #0b5d84;
+  color: white;
+  padding: 30px 40px;
+  margin-top: 0px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end; /* ✅ Выравниваем элементы по нижнему краю */
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.footer-logo {
+  height: 40px;
+  margin-bottom: 10px;
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* ✅ Контент прижат к низу */
+}
+
+.footer-left p {
+  font-size: 12px;
+  margin: 4px 0;
+}
+
+.footer-left a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.footer-left a:hover {
+  text-decoration: underline;
+}
+
+.footer-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* ✅ Контент прижат к низу */
+  gap: 6px;
+  text-align: right;
+}
+
+.footer-right a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.footer-right a:hover {
+  text-decoration: underline;
+}

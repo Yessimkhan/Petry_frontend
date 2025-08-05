@@ -376,3 +376,9 @@ function showPopup(message) {
 
     closeBtn.onclick = () => popup.classList.add('hidden');
 }
+
+fetch("/footer.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("footer-container").innerHTML = data;
+    });

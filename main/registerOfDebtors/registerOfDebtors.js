@@ -10,7 +10,13 @@ if (!localStorage.getItem('consentAccepted')) {
     document.getElementById('consentModal').style.display = 'flex';
 }
 
-document.getElementById('acceptConsent').addEventListener('click', function () {
-    localStorage.setItem('consentAccepted', 'true');
-    document.getElementById('consentModal').style.display = 'none';
-});
+// document.getElementById('acceptConsent').addEventListener('click', function () {
+//     localStorage.setItem('consentAccepted', 'true');
+//     document.getElementById('consentModal').style.display = 'none';
+// });
+
+fetch("../../footer.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("footer-container").innerHTML = data;
+    });

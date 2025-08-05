@@ -1,12 +1,15 @@
 import { API_URL } from '../../config.js';
 import flatpickr from "https://unpkg.com/flatpickr@4.6.13/dist/esm/index.js";
 import { Russian } from "https://unpkg.com/flatpickr@4.6.13/dist/esm/l10n/ru.js";
+import * as XLSX from "https://cdn.jsdelivr.net/npm/xlsx@0.18.5/+esm";
 
+const excelPath = "../../docs/Отчет формы №4.xlsx";
 const toggleButton = document.getElementById("menuToggle");
 const sidebar = document.getElementById("sidebar");
 toggleButton.addEventListener("click", () => {
     sidebar.classList.toggle("hidden");
 });
+let currentExecutionStatus = null;
 
 function updateCheckboxCount(detailsElement) {
     const checkboxes = detailsElement.querySelectorAll('input[type="checkbox"]');
@@ -152,6 +155,12 @@ function collectSelectedData() {
 
 document.querySelectorAll('.sendSelectedBtn').forEach(button => {
     button.addEventListener('click', async () => {
+        // 🔹 Проверка статуса перед отправкой
+        if (currentExecutionStatus && /окончен|закрыт/i.test(currentExecutionStatus)) {
+            showPopup('Исполнительное производство уже завершено. Отправка не требуется.');
+            return; // выходим, не отправляем
+        }
+
         const token = localStorage.getItem('access_token');
         if (!token) {
             window.location.href = 'auth/login/login.html';
@@ -182,10 +191,8 @@ document.querySelectorAll('.sendSelectedBtn').forEach(button => {
                 let userFriendlyMessage = 'Произошла ошибка. Пожалуйста, попробуйте позже.';
 
                 try {
-                    const result = await response.json();
                     const rawMessage = result.message || result.detail || response.statusText;
 
-                    // Преобразуем известные ошибки в более понятные тексты
                     switch (response.status) {
                         case 400:
                             userFriendlyMessage = 'Неверный запрос. Проверьте введённые данные.';
@@ -215,7 +222,6 @@ document.querySelectorAll('.sendSelectedBtn').forEach(button => {
                 }, 50);
                 return;
             }
-
 
             console.log('Ответ сервера:', result);
             setTimeout(() => {
@@ -341,6 +347,14 @@ document.querySelectorAll('.select-category-btn').forEach(btn => {
     });
 });
 
+let statusLabel = document.getElementById('executionStatus');
+if (!statusLabel) {
+    statusLabel = document.createElement('h3');
+    statusLabel.id = 'executionStatus';
+    statusLabel.style.marginTop = '5px';
+    document.getElementById('executionTitle').after(statusLabel);
+}
+
 document.getElementById('searchExecutionBtn').addEventListener('click', async () => {
     const caseNumber = document.getElementById('executionInput').value.trim();
     if (!caseNumber) {
@@ -348,35 +362,84 @@ document.getElementById('searchExecutionBtn').addEventListener('click', async ()
         return;
     }
 
-    const token = localStorage.getItem('access_token');
-    if (!token) {
-        window.location.href = '../../auth/login/login.html';
-        return;
-    }
-
     try {
-        const response = await fetch(`${API_URL}/requests/check-case-number/`, {
-            method: 'POST',
-            headers: {
-                'Authorization': 'Bearer ' + token,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ case_number: caseNumber })
-        });
+        // Загружаем Excel как ArrayBuffer
+        const response = await fetch(excelPath);
+        const arrayBuffer = await response.arrayBuffer();
 
-        const result = await response.json();
+        // Читаем через SheetJS
+        const workbook = XLSX.read(arrayBuffer, { type: "array" });
+        const sheetName = workbook.SheetNames[0];
+        const sheet = workbook.Sheets[sheetName];
+        const data = XLSX.utils.sheet_to_json(sheet);
 
-        if (response.ok && result.message) {
-            document.getElementById('executionTitle').textContent = `Исполнительное производство: ${caseNumber}`;
+        // Ищем запись
+        const record = data.find(row => String(row["№ производства"]).trim() === caseNumber);
+
+        if (record) {
+            const status = record["Статус производства"] || "Статус не указан";
+            currentExecutionStatus = status;
+
+            // Показываем popup
+            showPopup(`Мы нашли производство ${caseNumber}`);
+
+            document.getElementById('executionTitle').textContent =
+                    `Исполнительное производство: ${caseNumber}`;
+
+                // Обновляем статус с цветом
+                statusLabel.textContent = `Статус: ${status}`;
+                if (/окончен|закрыт/i.test(status)) {
+                    statusLabel.style.color = 'green';
+                } else {
+                    statusLabel.style.color = 'red';
+                }
+
         } else {
-            showPopup(result.message || 'Произошла ошибка при поиске');
+            showPopup('Извините, производство с таким номером не найдено');
         }
     } catch (error) {
         console.error('Ошибка при поиске:', error);
-        showPopup('Ошибка сети или сервера');
+        showPopup('Ошибка при поиске файла');
     }
 });
+
+
+// document.getElementById('searchExecutionBtn').addEventListener('click', async () => {
+//     const caseNumber = document.getElementById('executionInput').value.trim();
+//     if (!caseNumber) {
+//         showPopup('Введите номер исполнительного производства');
+//         return;
+//     }
+
+//     const token = localStorage.getItem('access_token');
+//     if (!token) {
+//         window.location.href = '../../auth/login/login.html';
+//         return;
+//     }
+
+//     try {
+//         const response = await fetch(`${API_URL}/requests/check-case-number/`, {
+//             method: 'POST',
+//             headers: {
+//                 'Authorization': 'Bearer ' + token,
+//                 'Accept': 'application/json',
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify({ case_number: caseNumber })
+//         });
+
+//         const result = await response.json();
+
+//         if (response.ok && result.message) {
+//             document.getElementById('executionTitle').textContent = `Исполнительное производство: ${caseNumber}`;
+//         } else {
+//             showPopup(result.message || 'Произошла ошибка при поиске');
+//         }
+//     } catch (error) {
+//         console.error('Ошибка при поиске:', error);
+//         showPopup('Ошибка сети или сервера');
+//     }
+// });
 
 function showPopup(message) {
     const popup = document.getElementById('customAlert');
@@ -393,3 +456,9 @@ function showPopup(message) {
 
     closeBtn.onclick = () => popup.classList.add('hidden');
 }
+
+fetch("../../footer.html")
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById("footer-container").innerHTML = data;
+    });
