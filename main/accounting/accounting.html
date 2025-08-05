@@ -24,10 +24,7 @@
         </div>
     </header>
 
-
-
     <div class="container">
-
         <!-- Sidebar -->
         <aside class="sidebar" id="sidebar">
             <nav class="menu">
@@ -39,7 +36,6 @@
                         <a href="#">Меры</a>
                     </div>
                 </div>
-
                 <a class="menu-item active" href="#">Бухгалтерия</a>
                 <a class="menu-item" href="../registerOfDebtors/registerOfDebtors.html">Реестр должников</a>
                 <a class="menu-item" href="../statistics/statistics.html">Статистика</a>
@@ -54,30 +50,22 @@
                 <input type="file" class="file-input" style="display: none;" accept=".xls,.xlsx">
             </div>
 
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Дата</th>
-                            <th>Выбытие денег (дебит)</th>
-                            <th>Поступление денег (кредит)</th>
-                            <th>Наименование операции</th>
-                            <th>Номер в АИСОИП</th>
-                            <th>Должник</th>
-                            <th>Взыскатель</th>
-                            <th>Оплата ЧСИ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            <div class="tables-container">
+                <!-- Excel Table -->
+                <div class="table-wrapper">
+                    <div id="sheet-tabs" class="tabs"></div>
+                    <div id="excel-wrapper">
+                        <div id="excel-table"></div>
+                    </div>
+                </div>
 
-                    </tbody>
-                </table>
+                <!-- Summary Table -->
+                <div id="summary-container" class="summary-wrapper"></div>
             </div>
-
-            <div id="summary-container"></div>
         </main>
     </div>
     <div id="footer-container"></div>
+    
     <!-- JS -->
     <script src="accounting.js"></script>
 </body>
