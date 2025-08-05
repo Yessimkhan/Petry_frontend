@@ -70,7 +70,7 @@ function readExcelFile(file) {
         const ipTotals = {};
 
         json.forEach(row => {
-            const ipName = row["Должник"] || "Не указан"; // или "Взыскатель"
+            const ipName = row["Номер в АИСОИП"] || "Не указан"; // или "Взыскатель"
             const debit = parseFloat(row["Выбытие денег (дебит)"].toString().replace(',', '.')) || 0;
             const credit = parseFloat(row["Поступление денег (кредит)"].toString().replace(',', '.')) || 0;
 
