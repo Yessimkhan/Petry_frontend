@@ -234,24 +234,3 @@ th {
     overflow: hidden; /* Prevents page scrolling */
     min-width: 0; /* Allows flex item to shrink */
 }
-
-.file-tabs {
-    margin-bottom: 15px;
-    display: flex;
-    gap: 5px;
-}
-
-.file-tab {
-    padding: 8px 15px;
-    border: 1px solid #ccc;
-    background: #f8f8f8;
-    cursor: pointer;
-    border-radius: 5px 5px 0 0;
-    font-weight: bold;
-}
-
-.file-tab.active {
-    background: #ffffff;
-    border-bottom: 1px solid white;
-    color: #0b5d84;
-}
