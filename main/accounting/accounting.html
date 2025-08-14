@@ -36,8 +36,7 @@
                         <a href="#">Меры</a>
                     </div>
                 </div>
-                <a class="menu-item active" href="">Выписка</a>
-                <a class="menu-item" href="../AIS OIP/ais.html">AIS OIP</a>
+                <a class="menu-item active" href="">Бухгалтерия</a>
                 <a class="menu-item" href="../registerOfDebtors/registerOfDebtors.html">Реестр должников</a>
                 <a class="menu-item" href="../statistics/statistics.html">Статистика</a>
             </nav>
@@ -45,23 +44,41 @@
 
         <!-- Main Content -->
         <main class="content">
-            <div class="file-section">
-                <input type="text" class="file-name" value="file-name.xlsx" readonly>
-                <button class="upload-button">Загрузите файл</button>
-                <input type="file" class="file-input" style="display: none;" accept=".xls,.xlsx">
+            <div class="filter-buttons" style="margin-bottom: 10px;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="segment-button active" data-target="accounting-view">Выписка</button>
+                    <button class="segment-button" data-target="ais-view">AIS OIP</button>
+                </div>
             </div>
 
-            <div class="tables-container">
-                <!-- Excel Table -->
-                <div class="table-wrapper">
-                    <div id="sheet-tabs" class="tabs"></div>
-                    <div id="excel-wrapper">
-                        <div id="excel-table"></div>
-                    </div>
+            <!-- Accounting View -->
+            <div id="accounting-view" class="view-section active">
+                <div class="file-section">
+                    <input type="text" class="file-name" value="file-name.xlsx" readonly>
+                    <button class="upload-button">Загрузите файл</button>
+                    <input type="file" class="file-input" style="display: none;" accept=".xls,.xlsx">
                 </div>
 
-                <!-- Summary Table -->
-                <div id="summary-container" class="summary-wrapper"></div>
+                <div class="tables-container">
+                    <!-- Excel Table -->
+                    <div class="table-wrapper">
+                        <div id="sheet-tabs" class="tabs"></div>
+                        <div id="excel-wrapper">
+                            <div id="excel-table"></div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Table -->
+                    <div id="summary-container" class="summary-wrapper"></div>
+                </div>
+            </div>
+
+            <!-- AIS OIP View -->
+            <div id="ais-view" class="view-section">
+                <div id="ais-sheet-tabs" class="tabs"></div>
+                <div id="ais-excel-wrapper">
+                    <div id="ais-excel-table"></div>
+                </div>
             </div>
         </main>
     </div>

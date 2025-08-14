@@ -3,6 +3,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById("sidebar");
     toggleButton.addEventListener("click", () => sidebar.classList.toggle("hidden"));
 
+    // Segment buttons functionality
+    const segmentButtons = document.querySelectorAll('.segment-button');
+    segmentButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons and views
+            segmentButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.view-section').forEach(view => view.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding view
+            button.classList.add('active');
+            const targetView = document.getElementById(button.dataset.target);
+            targetView.classList.add('active');
+        });
+    });
+
+    // Initialize accounting view
+    initAccountingView();
+    initAisView();
+
+    // Load footer
+    fetch("../../footer.html")
+        .then(response => response.text())
+        .then(data => {
+            const footerContainer = document.getElementById("footer-container");
+            if (footerContainer) footerContainer.innerHTML = data;
+        });
+});
+
+function initAccountingView() {
     const uploadButton = document.querySelector('.upload-button');
     const fileInput = document.querySelector('.file-input');
     const fileNameInput = document.querySelector('.file-name');
@@ -11,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const summaryContainer = document.getElementById('summary-container');
 
     // Initialize empty table
-    // Modify the table initialization in accounting.js
     if (tableContainer) {
         tableContainer.innerHTML = `
         <table>
@@ -67,6 +95,51 @@ document.addEventListener('DOMContentLoaded', () => {
             readExcelFile(file);
         }
     });
+
+    function loadMockData() {
+        fetch('/docs/mock_finance_data.xlsx') // Update path to your mock file location
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Mock file not found');
+                }
+                return response.arrayBuffer();
+            })
+            .then(data => {
+                const workbook = XLSX.read(data, { type: 'array' });
+                
+                // Set mock file name
+                fileNameInput.value = 'mock_finance_data.xlsx';
+                
+                // Process the first sheet
+                if (workbook.SheetNames.length > 0) {
+                    processWorksheet(workbook.Sheets[workbook.SheetNames[0]]);
+                    
+                    // Create tabs if multiple sheets exist
+                    tabsContainer.innerHTML = '';
+                    workbook.SheetNames.forEach((sheetName, index) => {
+                        const tab = document.createElement('button');
+                        tab.textContent = sheetName;
+                        tab.classList.add('tab-button');
+                        if (index === 0) tab.classList.add('active');
+
+                        tab.addEventListener('click', () => {
+                            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+                            tab.classList.add('active');
+                            processWorksheet(workbook.Sheets[sheetName]);
+                        });
+
+                        tabsContainer.appendChild(tab);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error loading mock data:', error);
+                // If mock file fails to load, keep the empty table
+            });
+    }
+
+    // Call this function to load mock data on initialization
+    loadMockData();
 
     function readExcelFile(file) {
         const reader = new FileReader();
@@ -244,13 +317,61 @@ document.addEventListener('DOMContentLoaded', () => {
             excelWrapper.style.maxHeight = 'none';
         }
     }
+}
 
-    // Load footer
-    fetch("../../footer.html")
-        .then(response => response.text())
-        .then(data => {
-            const footerContainer = document.getElementById("footer-container");
-            if (footerContainer) footerContainer.innerHTML = data;
-        });
-});
+function initAisView() {
+    const tabsContainer = document.getElementById('ais-sheet-tabs');
+    const tableContainer = document.getElementById('ais-excel-table');
 
+    // Загружаем Excel-файл из проекта
+    fetchExcelFile('/docs/пример AIS OIP.xlsx');
+
+    function fetchExcelFile(url) {
+        fetch(url)
+            .then(response => response.arrayBuffer())
+            .then(data => {
+                const workbook = XLSX.read(data, { type: 'array' });
+
+                // Создаём вкладки для всех листов
+                workbook.SheetNames.forEach((sheetName, index) => {
+                    const tab = document.createElement('button');
+                    tab.textContent = sheetName;
+                    tab.classList.add('tab-button');
+                    if (index === 0) tab.classList.add('active');
+
+                    tab.addEventListener('click', () => {
+                        // Меняем активную вкладку
+                        document.querySelectorAll('#ais-sheet-tabs .tab-button').forEach(btn => btn.classList.remove('active'));
+                        tab.classList.add('active');
+
+                        // Показываем таблицу выбранного листа
+                        renderSheet(workbook.Sheets[sheetName]);
+                    });
+
+                    tabsContainer.appendChild(tab);
+                });
+
+                // Показываем первый лист по умолчанию
+                renderSheet(workbook.Sheets[workbook.SheetNames[0]]);
+            })
+            .catch(err => console.error('Ошибка загрузки Excel:', err));
+    }
+
+    // Функция рендеринга листа с адаптацией
+    function renderSheet(sheet) {
+        const htmlTable = XLSX.utils.sheet_to_html(sheet);
+        tableContainer.innerHTML = htmlTable;
+
+        const table = tableContainer.querySelector('table');
+        if (table) {
+            // Remove all inline styles added by XLSX
+            table.removeAttribute('style');
+            table.removeAttribute('border');
+            table.removeAttribute('width');
+
+            // Apply our preferred styles
+            table.style.width = 'auto';
+            table.style.margin = '0';
+        }
+    }
+}

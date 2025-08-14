@@ -242,16 +242,17 @@ th {
 }
 
 .file-tab {
-    padding: 8px 15px;
-    border: 1px solid #ccc;
-    background: #f8f8f8;
+    padding: 32px 44px;
+    font-size: 18px;
+    background-color: #2f6c8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-    border-radius: 5px 5px 0 0;
-    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
 .file-tab.active {
-    background: #ffffff;
-    border-bottom: 1px solid white;
-    color: #0b5d84;
+    background-color: #0b5d84;
+    color: white;
 }

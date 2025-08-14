@@ -2,7 +2,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', sans-serif;
-    height: 120vh;
+    height: 150vh;
     display: flex;
     flex-direction: column;
     background-color: #f9f9f9;
@@ -383,4 +383,63 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #a8a8a8;
+}
+
+/* View Sections */
+.view-section {
+    display: none;
+}
+
+.view-section.active {
+    display: block;
+}
+
+/* Segment Buttons */
+.segment-button {
+    padding: 32px 44px;
+    font-size: 18px;
+    background-color: #2f6c8a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.segment-button.active {
+    background-color: #0b5d84;
+    color: white;
+}
+
+/* AIS Table Styles */
+#ais-excel-wrapper {
+    width: 100%;
+    max-height: calc(100vh - 200px);
+    overflow-x: auto;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: white;
+    position: relative;
+}
+
+#ais-excel-table {
+    display: block;
+    min-width: 100%;
+    width: max-content;
+}
+
+#ais-excel-table table {
+    width: auto;
+    table-layout: auto;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+#ais-excel-table th,
+#ais-excel-table td {
+    border: 1px solid #ccc;
+    padding: 6px 10px;
+    white-space: nowrap;
+    position: relative;
 }
