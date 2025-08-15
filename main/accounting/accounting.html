@@ -64,7 +64,100 @@
                     <div class="table-wrapper">
                         <div id="sheet-tabs" class="tabs"></div>
                         <div id="excel-wrapper">
-                            <div id="excel-table"></div>
+                            <!-- Updated Excel Table in the Accounting View -->
+                            <div id="excel-table">
+                                <table>
+                                    <colgroup>
+                                        <col style="width: 100px"> <!-- Date -->
+                                        <col style="width: 100px"> <!-- Debit -->
+                                        <col style="width: 100px"> <!-- Credit -->
+                                        <col style="width: 150px"> <!-- Statement -->
+                                        <col style="width: 80px"> <!-- Doc Number -->
+                                        <col style="width: 120px"> <!-- Counterparty Bank -->
+                                        <col style="width: 120px"> <!-- Counterparty -->
+                                        <col style="width: 100px"> <!-- BIN/IIN -->
+                                        <col style="width: 120px"> <!-- Counterparty Account -->
+                                        <col style="width: 180px"> <!-- Payment Purpose -->
+                                        <col style="width: 120px"> <!-- Operation Name -->
+                                        <col style="width: 120px"> <!-- AIS OIP Number -->
+                                        <col style="width: 120px"> <!-- Debtor -->
+                                        <col style="width: 120px"> <!-- Collector -->
+                                        <col style="width: 100px"> <!-- CHSI Payment -->
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th>Дата</th>
+                                            <th>Выбытие</th>
+                                            <th>Поступление</th>
+                                            <th>Выписка</th>
+                                            <th>№ док.</th>
+                                            <th>Банк контрагента</th>
+                                            <th>Контрагент</th>
+                                            <th>БИН/ИИН</th>
+                                            <th>Счет контрагента</th>
+                                            <th>Назначение платежа</th>
+                                            <th>Операция</th>
+                                            <th>№ АИСОИП</th>
+                                            <th>Должник</th>
+                                            <th>Взыскатель</th>
+                                            <th>Оплата ЧСИ</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>2025-08-01</td>
+                                            <td>15,000</td>
+                                            <td></td>
+                                            <td>Выписка №1</td>
+                                            <td>DOI</td>
+                                            <td>Halv</td>
+                                            <td>TOX</td>
+                                            <td>123</td>
+                                            <td>KZ1</td>
+                                            <td>Оплата</td>
+                                            <td>Платеж</td>
+                                            <td>AIS</td>
+                                            <td>Иванов</td>
+                                            <td>Петров</td>
+                                            <td>500</td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-08-02</td>
+                                            <td></td>
+                                            <td>25,000</td>
+                                            <td>Выписка №2</td>
+                                            <td>DOI</td>
+                                            <td>Kas</td>
+                                            <td>ИП</td>
+                                            <td>987</td>
+                                            <td>KZ5</td>
+                                            <td>Возврат</td>
+                                            <td>Поступление</td>
+                                            <td>AIS</td>
+                                            <td>Сергеев</td>
+                                            <td>Ким</td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2025-08-03</td>
+                                            <td>10,000</td>
+                                            <td></td>
+                                            <td>Выписка №3</td>
+                                            <td>DOI</td>
+                                            <td>Fori</td>
+                                            <td>TOX</td>
+                                            <td>456</td>
+                                            <td>KZ4</td>
+                                            <td>Оплата</td>
+                                            <td>Платеж</td>
+                                            <td>AIS</td>
+                                            <td>Нургазин</td>
+                                            <td>Моисеев</td>
+                                            <td>300</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
 
@@ -83,7 +176,7 @@
         </main>
     </div>
     <div id="footer-container"></div>
-    
+
     <!-- JS -->
     <script src="accounting.js"></script>
 </body>
