@@ -216,9 +216,9 @@ body {
 
 /* Excel Table Styles */
 #excel-wrapper {
-    flex: 1;
-    overflow: auto;
-    position: relative;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling in Safari */
+    width: 100%;
 }
 
 #excel-table {
@@ -227,9 +227,8 @@ body {
 }
 
 #excel-table table {
-    width: 100%;
-    border-collapse: collapse;
     table-layout: fixed;
+    min-width: 100%;
 }
 
 #excel-table th, #excel-table td {
@@ -241,11 +240,10 @@ body {
 }
 
 #excel-table th {
-    background-color: #f5f5f5;
+    position: -webkit-sticky; /* Safari fix */
     position: sticky;
     top: 0;
     z-index: 10;
-    font-weight: 600;
 }
 
 #excel-table tr:nth-child(even) {
@@ -254,6 +252,10 @@ body {
 
 #excel-table tr:hover {
     background-color: #f0f0f0;
+}
+
+#excel-table colgroup col {
+    display: table-column; /* Safari needs this */
 }
 
 /* Column Widths */
